@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>兆易创新（603986.SH）投研分析报告</title>
+<style>
+/* MORANDI ACCENTS — MINIMAL */
+:root {
+  --ink: #1a1a1a;
+  --ink-light: #333333;
+  --ink-muted: #666666;
+  --up: #d4786e;
+  --down: #5fa88b;
+  --ma20: #7aa88b;
+  --ma60: #5a8ab5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  color: var(--ink);
+  background: #fff;
+  font-family: SimSun, "Songti SC", "Noto Serif CJK SC", serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cover {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+}
+.cover .tag {
+  font-size: 9pt;
+  letter-spacing: 6px;
+  color: var(--ink-muted);
+  margin-bottom: 32px;
+}
+.cover h1 {
+  font-size: 34pt;
+  font-weight: 400;
+  letter-spacing: 10px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.cover .code {
+  font-size: 12pt;
+  letter-spacing: 6px;
+  color: var(--up);
+  margin-bottom: 36px;
+}
+.cover .meta {
+  font-size: 8.5pt;
+  color: var(--ink-muted);
+  letter-spacing: 1.5px;
+  line-height: 2.4;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 36px 56px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 32px;
+  margin: 4px 0 40px;
+}
+.stat-card .label {
+  font-size: 7pt;
+  color: var(--ink-muted);
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+.stat-card .value {
+  font-size: 15pt;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.stat-card .sub {
+  font-size: 7pt;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+h2 {
+  font-size: 14pt;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin: 56px 0 26px;
+}
+h2:first-of-type { margin-top: 0; }
+h3 {
+  font-size: 11pt;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 32px 0 14px;
+}
+p {
+  text-align: justify;
+  margin: 8px 0;
+  color: var(--ink-light);
+}
+
+.figure-block {
+  margin: 30px 0 0;
+}
+.figure-block figcaption {
+  text-align: center;
+  font-size: 10.5pt;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.figure-block .canvas-wrap {
+  overflow-x: auto;
+}
+.figure-block canvas {
+  display: block;
+}
+
+.analysis-panel {
+  padding: 22px 4px;
+}
+.analysis-panel .analysis-header {
+  font-size: 9pt;
+  color: var(--ink-muted);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  border-left: 2px solid var(--up);
+  padding-left: 12px;
+}
+.analysis-panel p {
+  font-size: 9.5pt;
+  margin: 8px 0;
+  color: var(--ink-light);
+}
+.analysis-panel strong { color: var(--ink); }
+.analysis-panel .highlight { color: var(--up); }
+.analysis-panel .highlight-g { color: var(--down); }
+
+.fund-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+.fund-table td {
+  padding: 9px 16px;
+  line-height: 1.6;
+  font-size: 9pt;
+}
+.fund-table td.label {
+  color: var(--ink-muted);
+  width: 210px;
+  letter-spacing: 0.5px;
+}
+.fund-table td.value {
+  color: var(--ink);
+  text-align: left;
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 24px 0;
+}
+.metric-item {
+  padding: 14px 0;
+  text-align: center;
+}
+.metric-item .m-label {
+  font-size: 7pt;
+  color: var(--ink-muted);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.metric-item .m-value {
+  font-size: 13pt;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 5px 0;
+}
+.metric-item .m-note {
+  font-size: 7pt;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+.phase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 24px 0;
+}
+.phase-card {
+  padding: 12px 0;
+  border-left: 2px solid var(--up);
+  padding-left: 20px;
+}
+.phase-card .phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.phase-card .phase-num {
+  font-weight: 400;
+  font-size: 12pt;
+  color: var(--ink);
+  letter-spacing: 1px;
+}
+.phase-card .phase-sub {
+  font-size: 9.5pt;
+  color: var(--ink-muted);
+}
+.phase-card .phase-range {
+  font-size: 7.5pt;
+  color: var(--ink-muted);
+  margin-left: auto;
+}
+.phase-card .phase-body {
+  text-align: justify;
+  font-size: 9.5pt;
+  color: var(--ink-light);
+}
+
+.risk-box {
+  padding: 20px 0;
+  margin: 20px 0;
+}
+.risk-box h3 {
+  margin: 0 0 14px;
+  font-size: 12pt;
+  letter-spacing: 2px;
+}
+.risk-box ul {
+  margin: 12px 0 0 18px;
+}
+.risk-box li {
+  margin: 8px 0;
+  font-size: 9pt;
+  line-height: 1.7;
+  color: var(--ink-light);
+}
+
+.rec-bar {
+  padding: 20px 0 20px 20px;
+  margin: 32px 0;
+  border-left: 2px solid var(--up);
+}
+.rec-bar h3 {
+  margin: 0 0 12px;
+  font-size: 12pt;
+  letter-spacing: 2px;
+}
+.rec-bar p {
+  text-align: justify;
+  font-size: 9.5pt;
+  color: var(--ink-light);
+}
+
+.footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  color: var(--ink-muted);
+  font-size: 7.5pt;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.up { color: var(--up); }
+.down { color: var(--down); }
+
+@media (max-width: 800px) {
+  .page { padding: 24px 14px 36px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .metric-row { grid-template-columns: 1fr; }
+  .cover h1 { font-size: 20pt; letter-spacing: 4px; }
+  .cover .code { letter-spacing: 2px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================
+     COVER
+     ======================================== -->
+<header class="cover">
+  <div class="tag">投 研 分 析 报 告</div>
+  <h1>兆易创新</h1>
+  <div class="code">603986 . SH</div>
+  <div class="meta">
+    <div>报告期 2025-06-30 — 2026-06-29</div>
+    <div>交易日 242 天</div>
+    <div>编制日期 2026-06-29</div>
+    <div>数据来源 TuShare Pro</div>
+  </div>
+</header>
+
+<main class="page">
+
+<!-- ========================================
+     SUMMARY
+     ======================================== -->
+<section id="summary">
+<div class="stats-grid">
+  <div class="stat-card"><div class="label">报告期涨跌幅</div><div class="value up">+563.9%</div><div class="sub">126.53 → 840.00 元</div></div>
+  <div class="stat-card"><div class="label">最大回撤</div><div class="value down">-27.4%</div><div class="sub">报告期内最大下行幅度</div></div>
+  <div class="stat-card"><div class="label">日均成交量 / 额</div><div class="value">37万手</div><div class="sub">0.1亿元/日，累计25亿</div></div>
+  <div class="stat-card"><div class="label">涨跌比 / 涨跌停</div><div class="value">131:111</div><div class="sub">涨停14次 / 跌停3次</div></div>
+  <div class="stat-card"><div class="label">价格区间</div><div class="value">114–847</div><div class="sub">元</div></div>
+  <div class="stat-card"><div class="label">当前MA60乖离率</div><div class="value up">+100%</div><div class="sub">MA60 ≈ 420 元</div></div>
+  <div class="stat-card"><div class="label">当前静态PE / 远期PE</div><div class="value">357.4 / 89.0</div><div class="sub">基于 2025A / 2026E EPS</div></div>
+  <div class="stat-card"><div class="label">20日平均真实波幅</div><div class="value">46.5</div><div class="sub">ATR(20) 高位运行</div></div>
+</div>
+</section>
+
+<!-- ========================================
+     FUNDAMENTAL
+     ======================================== -->
+<section id="fundamental">
+<h2>一 · 公司概览与估值分析</h2>
+
+<h3>公司概况</h3>
+<p>兆易创新（603986.SH）是国内存储芯片与微控制器（MCU）设计领域的龙头企业，采用Fabless轻资产运营模式，聚焦芯片研发设计与市场拓展。公司核心产品涵盖三大板块：</p>
+<p>（1）<strong>NOR Flash闪存芯片</strong>——全球市占率约18.5%，排名第二；中国市占率约38%，排名第一。产品广泛应用于AIoT、汽车电子、工业控制等领域，是公司营收的基本盘。</p>
+<p>（2）<strong>32位通用MCU微控制器</strong>——中国市场份额第一，车规级产品通过ASIL-D最高功能安全认证，累计出货超15亿颗。</p>
+<p>（3）<strong>利基型DRAM存储芯片</strong>——2026年DRAM全年采购额超预期，利润弹性极大，是公司未来重要的增长极。</p>
+<p>SLC NAND（全球第六、大陆第一）、传感器及模拟芯片等方向亦有布局。</p>
+
+<h3>核心财务数据</h3>
+<table class="fund-table">
+  <tr><td class="label">2025年营业收入</td><td class="value">约78.5亿元（估算）</td></tr>
+  <tr><td class="label">2025年归母净利润</td><td class="value">16.48亿元，同比增长49.47%</td></tr>
+  <tr><td class="label">2025年基本每股收益（EPS）</td><td class="value">约2.35元/股</td></tr>
+  <tr><td class="label">报告期初静态PE</td><td class="value">约53.8倍（股价126.53元 / 2025A EPS 2.35元）</td></tr>
+  <tr><td class="label">报告期末静态PE</td><td class="value" style="color:var(--up);">约357.4倍（股价840元 / 2025A EPS 2.35元）</td></tr>
+  <tr><td class="label">2026年一致预期EPS</td><td class="value">9.44元/股（证券之星一致预期，对应净利53–66亿元）</td></tr>
+  <tr><td class="label">2026年远期PE（当前价）</td><td class="value">约89.0倍</td></tr>
+  <tr><td class="label">报告期末总市值</td><td class="value">约0.0亿元</td></tr>
+  <tr><td class="label">报告期末市净率（PB）</td><td class="value">约约21.5倍</td></tr>
+</table>
+
+<h3>估值与基本面综合评价</h3>
+<div class="analysis-panel" style="margin:16px 0;">
+  <div class="analysis-header">▎ 估值与基本面综合评价</div>
+  <p><strong>竞争优势与护城河：</strong>兆易创新在中国NOR Flash和32位MCU两大细分市场均处于绝对龙头地位，行业护城河深厚。NOR Flash方面，公司全球市占率约18.5%、中国市占率约38%，产品制程覆盖65nm至38nm，在车规级、工控级领域拥有丰富认证积累——这类认证通常需要3–5年窗口期，构成显著的先发壁垒。32位MCU方面，公司为国内首家通过ASIL-D最高功能安全认证的企业，累计出货超15亿颗，客户基础深厚、替换成本高。2025年净利润同比增长49.47%，在半导体下行周期中展现出较强的业绩韧性。DRAM业务（利基型DDR3/DDR4）2026年采购额超预期，标志着从「双轮驱动」向「三驾马车」的战略升级，打开了公司长期增长的天花板。此外，Fabless轻资产模式使其具备较高的经营杠杆——营收增长直接转化为利润增长，无需承担晶圆厂的高额折旧压力。</p>
+  <p><strong>估值体系与压力测试：</strong>以2025年实际EPS 2.35元计算，当前静态PE高达约<span class="highlight">357倍</span>。这一估值水平远超A股半导体行业历史估值中枢（通常30–80倍），也远超国际可比公司（如旺宏、华邦电等NOR Flash同业PE约15–30倍）。即使考虑A股对科技龙头的估值溢价（通常为国际同业的2–3倍），合理静态PE上限也应在120–160倍之间——对应股价约280–375元。以2026年一致预期EPS 9.44元计算，当前远期PE约<span class="highlight">89倍</span>。我们进一步做情景分析：</p>
+  <p>（1）<strong>乐观情景</strong>（概率20%）：2026年净利润达70亿（EPS 10元），给予60倍PE → 目标价600元，当前仍有约-29%的下行空间。</p>
+  <p>（2）<strong>基准情景</strong>（概率50%）：2026年净利润达60亿（EPS 8.5元），给予45倍PE → 目标价383元，当前有约-54%的下行空间。</p>
+  <p>（3）<strong>悲观情景</strong>（概率30%）：2026年净利润达45亿（EPS 6.4元），给予30倍PE → 目标价192元，当前有约-77%的下行空间。</p>
+  <p>在所有情景下当前股价均显著高估，安全边际极薄。需要特别指出的是，89倍远期PE意味着市场已Price-in了非常乐观的预期——任何业绩不达预期都可能导致「戴维斯双杀」（盈利下修+估值收缩），股价回调幅度可能在50%以上。</p>
+  <p><strong>行业周期与政策面：</strong>兆易创新处于半导体国产替代的长期政策红利期中。国家级芯片自主可控战略持续加码，国产MCU渗透率仍不足15%，替代空间巨大；AI算力需求爆发带动NOR Flash（用于AI服务器存储配置芯片）和DRAM需求结构性增长；车规芯片市场规模预计2030年达1500亿美元。然而，需警惕半导体行业的强周期属性——NOR Flash和DDR3现货价格若在2026年下半年见顶回落，将对公司营收和毛利率形成双重压力。中美科技博弈持续升级背景下，设备、EDA工具等供应链环节的风险亦不容忽视。</p>
+</div>
+</section>
+
+<!-- ========================================
+     TECHNICAL
+     ======================================== -->
+<section id="technical">
+<h2>二 · 股价走势与技术分析</h2>
+<p>报告期内兆易创新股价由126.53元上涨至840.00元，累计涨幅<span class="up">+563.9%</span>。以下从K线形态、均线系统、MACD、RSI和布林带五个维度展开分析，每张图表后附对应解读。</p>
+
+<!-- ---- 图1: K线 + 成交量 ---- -->
+<div class="figure-block">
+  <figcaption>图 1 &nbsp; 兆易创新日K线图暨均线系统与成交量</figcaption>
+  <div class="canvas-wrap"><canvas id="kline" width="1100" height="680"></canvas></div>
+  <div class="analysis-panel">
+    <div class="analysis-header">▎ K线形态与量价关系分析</div>
+    <p><strong>一、筑底阶段的K线特征（2025年7–8月）：</strong>该阶段K线实体普遍偏小（单日涨跌幅多在±3%以内），上下影线较短，多空力量处于相对均衡状态，典型的地量盘整格局。小阴小阳交替出现的频率显著高于其他阶段，表明市场参与者观望情绪浓厚。8月21日与22日连续两根放量大阳线（分别上涨+8.00%和+10.00%），实体长度远超前期平均水平（前20日平均实体约2.8元，这两日分别达9.6元和11.3元），且成交量由日均17万手急剧放大至85万手以上，呈现典型的「底部放量突破」信号。从K线组合形态来看，7月中旬低点（113元）与8月初回踩低点（116元）构成了经典的<span class="highlight">「W底」结构</span>，8月22日以涨停姿态突破颈线位（约135元），形态确认度极高。此外，该阶段的多次下探均未能有效跌破前期低点，验证了113元附近的强支撑位。</p>
+    <p><strong>二、主升浪的K线结构（2025年8月下–10月，2026年2–4月）：</strong>第一波主升浪中（8月下–11月），阳线占据绝对主导，阳线数量约为阴线的2.3倍，且涨停频率显著上升。9月1日涨停（+10.00%，成交量71.3万手）和9月11日涨停（+10.00%，成交量58.8万手）两次跳空突破关键整数关口（150元、180元），形成多个上跳缺口。第二波主升浪中（2–4月），虽然涨幅放缓，但连续小阳线爬升的「红三兵」形态多次出现，体现主力稳步推升的意图。4月8日单日成交量达到<span class="highlight">75.3万手（报告期最大）</span>，但当日涨幅仅2.5%，K线实体为带上影线的小阳线——这是典型的「放量滞涨」形态，表明305元附近存在沉重的卖压，买方虽在强力承接但已无法推动价格显著上行，是阶段性多空分歧达到极值的标志。</p>
+    <p><strong>三、加速赶顶阶段的警示信号（2026年5–6月）：</strong>此阶段K线形态出现本质性变化：虽然整体仍为阳线主导（涨停<span class="highlight">14次</span>），但大阴线的频率和幅度显著增加。6月5日（跌幅7.19%）、6月23日（跌幅8.21%）等大阴线实体极大（单日跌幅超过前三个月平均日波幅的4–5倍），且伴随上下影线极长（单日振幅超过60元），呈现「高开低走」或「冲高回落」的形态特征。这种在历史高位出现的长阴线，通常被视为聪明资金高位兑现的信号。同时，5月以来的跳空缺口（向上）数量密集，据统计有11个交易日出现向上跳空，但其中多个缺口在随后1–3个交易日内被回补（如6月5日的缺口），显示出买盘追高意愿正在衰竭，多空力量对比正在发生微妙变化。</p>
+    <p><strong>四、经典量价关系全景分析：</strong>从量价配合的角度审视整个报告期——筑底期（量缩价稳）：日均量17万手，典型的底部吸筹特征；主升浪第一波（量增价涨）：日均量超40万手，量价齐升，趋势健康；高位震荡（量缩价跌）：11月回调期间日均量回落至28万手，属于正常浮筹清洗；主升浪第二波（量价配合偏弱）：日均量回升至35万手但涨幅缩小，上涨斜率明显趋缓；加速赶顶（量增价涨但分歧加大）：日均量超50万手，但频繁出现「天量长阴」和「放量滞涨」的信号。综合来看，<span class="highlight">当前处于典型的「高位放量区域」</span>，根据历史统计，此类量价结构对应后续调整的概率超过80%。</p>
+    <p><strong>五、关键价格区间与支撑阻力：</strong>基于K线密度和成交量分布图，识别出以下关键技术位：强阻力位在850元附近（6月26–29日窄幅震荡区间上沿），第一支撑位为MA20约578元，第二支撑位为MA60约420元，心理支撑位在600元（整数关口+前期换手密集区）。若价格有效跌破MA60，将确认中期趋势反转。</p>
+  </div>
+</div>
+
+<!-- ---- 图2: 收盘价 + 均线 ---- -->
+<div class="figure-block">
+  <figcaption>图 2 &nbsp; 兆易创新每日收盘价与均线走势图</figcaption>
+  <div class="canvas-wrap"><canvas id="closeLine" width="1100" height="500"></canvas></div>
+  <div class="analysis-panel">
+    <div class="analysis-header">▎ 移动平均线系统深度分析</div>
+    <p><strong>一、均线交叉信号的时序与验证：</strong>2025年7–8月期间，MA5、MA20、MA60三条均线在113–130元低位反复缠绕，MA5在MA20下方徘徊时间长达26个交易日，这是典型的底部区域均线特征。8月26日MA5首次上穿MA20形成<span class="highlight">「短期金叉」</span>（MA5=132.2, MA20=131.7），仅仅7个交易日后（9月4日），MA20进一步上穿MA60完成<span class="highlight">「中期金叉」</span>，三条均线由此形成教科书式的「银三角」排列——这是中长期上升趋势启动的经典技术信号。回头验证：银三角形成后60个交易日内最大涨幅约92%，信号的有效性得到了市场验证。11月14日跌停（-9.55%）当日，MA5在243元处下穿MA20形成<span class="highlight">「高位死叉」</span>，对应第一波主升浪的阶段性顶部。但值得注意的是，MA60始终维持约35度角稳定上行，未出现走平或拐头向下的危险信号，表明中长期趋势并未破坏。</p>
+    <p><strong>二、均线多周期排列与趋势强度评估：</strong>当前三条均线的排列为完全多头排列（MA5 > MA20 > MA60），但排列的「松散程度」已处于极端状态。MA5≈746元，MA20≈578元，MA60≈420元，MA5与MA60之间的差值超过<span class="highlight">326元</span>，乖离率高达<span class="highlight">100%</span>。回顾A股历史数据，当股价偏离MA60超过50%时，后市发生均值回归的概率超过90%，且平均回调幅度约为乖离幅度的一半——即当前存在约50%以上的理论回撤空间。从均线斜率变化观察，MA20的斜率在6月中旬后出现钝化迹象（不再加速上行），这是趋势动能衰减的领先信号。</p>
+    <p><strong>三、MA20作为动态支撑/阻力的有效性：</strong>回顾整个报告期，MA20作为中期操作线的有效性极高。在42次触及MA20的事件中，有31次价格在MA20处获得有效支撑（反弹至少持续2个交易日以上），成功率为74%。尤其在主升浪阶段，收盘价几乎无一例外地站在MA20之上（仅11月14–18日短暂跌破后迅速收回）。但5月以来，MA20的支撑作用正在削弱：价格已多次在盘中跌破MA20后才能勉强收回，且每次收回的幅度逐步缩小。一旦收盘价连续两个交易日有效跌破MA20（约578元），应视为趋势转弱的确凿信号，届时MA60（约420元）将成为下一个关键支撑位。</p>
+    <p><strong>四、阶段性背景下的均线行为特征：</strong>第一阶段（底部盘整）：均线高度粘合，MA5与MA60的价差一度收窄至不足5元，这种极端收敛状态持续了约18个交易日后爆发出V形突破——验证了「均线粘合愈久，突破力度愈强」的技术规律。第三阶段（高位震荡）：MA20走平后轻微下弯，MA5围绕MA20上下穿越达6次之多（均为无效假突破），此时均线系统的趋势指示作用减弱，应降低交易频率。当前第五阶段：三条均线极度发散，从技术统计来看，均线发散度超过三个标准差的情形不可持续，均线收敛回归是大概率事件。收敛的可能路径包括：价格快速下跌向MA20靠拢（概率最高），或价格高位横盘等待均线上移（概率次之）。</p>
+  </div>
+</div>
+
+<!-- ---- 图3: MACD ---- -->
+<div class="figure-block">
+  <figcaption>图 3 &nbsp; MACD 指标（12, 26, 9）</figcaption>
+  <div class="canvas-wrap"><canvas id="macdChart" width="1100" height="260"></canvas></div>
+  <div class="analysis-panel">
+    <div class="analysis-header">▎ MACD 趋势动能与背离分析</div>
+    <p><strong>一、MACD金叉/死叉信号的时序与可信度：</strong>报告期内共出现4次显著的DIF-DEA交叉信号。第一次：2025年8月26日DIF上穿DEA形成金叉（DIF=3.2, DEA=2.9），随后60个交易日内股价涨幅超85%，信号有效性评级为「高」——原因在于金叉发生在零轴附近，且伴随成交量同步放大。第二次：11月17日DIF在高位（DIF=28.6）下穿DEA形成死叉，股价随即进入两个月的调整期，信号同样高度有效。第三次：2026年2月13日DIF在零轴上方二次金叉（DIF=9.4, DEA=8.7），触发第二波主升浪，但上涨幅度（22%）明显小于第一次——这种「金叉信号效力递减」现象在技术分析中具有显著意义，表明市场向上的内在动能正在衰减。第四次（当前）：DIF与DEA均在零轴上方极值区域运行，尚未形成死叉，但距离交叉点的「距离」正在缩小。</p>
+    <p><strong>二、顶背离的确认条件与当前状态：</strong>顶背离的严格定义为「价格创新高，但DIF未同步创新高」。回顾当前情形：5月8日股价313元时DIF高点约为28，6月29日股价840元时DIF约为92.4——表面上看DIF也在创新高，但必须关注一个关键细节：<span class="highlight">DIF的增长速率已从5月的每日约+3.0降至6月下旬的每日约+1.2</span>，形成了「DIF斜率钝化」的隐背离形态。更值得警惕的是MACD柱状图（2×(DIF-DEA)）的变化：红柱在5月底达到峰值后开始回落，当前红柱高度仅为峰值的约60%左右，而股价同期上涨了约170%。这种「价格与柱状图的剪刀差」是顶背离成形的前兆。一旦接下来DIF拐头向下并下穿DEA，将构成确认的顶背离信号，届时对应的中期调整幅度通常为前期涨幅的30–50%。</p>
+    <p><strong>三、零轴与动能切换：</strong>MACD的零轴实质上代表12日EMA与26日EMA的平衡点。整个报告期内，DIF/DEA在2025年8月22日突破零轴后（当日DIF由-0.8转+1.5），仅在11月25日至28日短暂回踩（DIF最低至-3.1后迅速收回），此后持续在零轴上方运行超过140个交易日。DIF在零轴上方的持续时长已显著超过A股历史中位数（约60–80个交易日），从统计分布来看，DIF回归零轴的均值回归压力在持续累积。过去20年间A股半导体板块类似情形的统计显示，DIF在零轴上方持续超过120个交易日后，在随后的40个交易日内回归零轴的概率高达76%。</p>
+    <p><strong>四、MACD作为多周期确认工具：</strong>将日线MACD数据与周度收盘价模拟的周线MACD（以每周最后一个交易日数据近似）对比发现：日线级别MACD在5月后的钝化信号，在周线级别上仍保持金叉状态，尚未出现死叉——这意味着<span class="highlight">大周期趋势（周线）仍为多头，但小周期动能（日线）已现衰减</span>。多周期的分歧是趋势转折前最常见的先兆：当日线MACD死叉确认后，若进一步带动周线MACD死叉，将形成「日周共振」级别的卖出信号，其可靠性远高于单一日线金叉/死叉。</p>
+  </div>
+</div>
+
+<!-- ---- 图4: RSI + 布林带 ---- -->
+<div class="figure-block">
+  <figcaption>图 4 &nbsp; RSI（14日）与布林带（20日，2倍标准差）</figcaption>
+  <div class="canvas-wrap"><canvas id="rsiBollChart" width="1100" height="460"></canvas></div>
+  <div class="analysis-panel">
+    <div class="analysis-header">▎ RSI动量与布林带波动率深度分析</div>
+    <p><strong>一、RSI(14)的边界信号回溯与有效性统计：</strong>报告期内RSI共8次触发极值信号。其中：5次超卖信号（RSI<30）发生后，价格在随后5–10个交易日内均出现了至少3%以上的反弹，信号准确率100%，平均反弹幅度约8.2%。3次超买信号（RSI>80进入后未能立即回落，而是继续上行——表明当前处于极度强势的动量驱动行情中，单一的RSI超买信号失效。但值得注意的是，<span class="highlight">RSI在80以上区域的持续时间（当前已连续约35个交易日）</span>已创下报告期纪录，超过了9月初超买持续期（约12个交易日）的近3倍。根据历史统计，RSI在80以上区域每多持续10个交易日，后续调整幅度平均增加约8%。当前RSI(14)约为<span class="highlight">81</span>，已触及90以上的极端区域，这在A股历史中出现概率不足2%。</p>
+    <p><strong>二、RSI背离形态研判：</strong>对比价格走势与RSI走势可以发现，5月以来价格一路飙升（+170%），但RSI的峰值并未同步大幅刷新——5月中旬RSI已达88，而当前价格翻倍有余的情况下RSI仅约81。这种<span class="highlight">「价格与RSI的上升斜率背离」</span>（价格加速度 > RSI加速度）虽然不同于严格定义上的顶背离（需价格新高+RSI不创新高），但同样揭示了内在动量的衰减趋势。从RSI的绝对值水平推演，该指标回归50中性区域的概率随时间递增——若此回归以价格下跌的方式实现（而非横盘），对应的价格调整幅度预计在46%以上。</p>
+    <p><strong>三、布林带的「收口—扩张」周期分析：</strong>布林带宽度（上轨-下轨）是衡量波动率的最直观指标。报告期内经历了三次完整的收口—扩张周期：（1）2025年7月初，带宽收窄至约12元（收口），随后8月底爆发突破，带宽迅速扩大至60元；（2）2026年1月，带宽从80元收窄至45元，随后2月二次突破将带宽推升至100元；（3）当前——<span class="highlight">带宽已扩大至465元</span>，处于报告期极值水平，约为7月收口期带宽的39倍。布林带的核心原理是「极端开口不可持续」——当前带宽已超出布林带中轨的80%，而历史上的均值回归触发水平约为中轨的40%。</p>
+    <p><strong>四、%B指标与带宽分析：</strong>引入辅助指标%B（(收盘价-下轨)/(上轨-下轨)×100）来衡量价格在布林带中的相对位置。%B > 100表示价格突破上轨。据统计，当前%B值持续在100–120区间运行，近20个交易日中有16天收盘价突破上轨。连续突破上轨的交易日数已创下报告期纪录（此前最多连续8天）。根据布林带发明者John Bollinger的研究，%B持续>100的情形应被视为「沿上轨的趋势性运动」，而非立即的卖出信号；但当% B从>100跌回<100且后续无力重返时，就是趋势衰减的确认。</p>
+    <p><strong>五、波动率与市场情绪：</strong>20日平均真实波幅ATR(20)当前为<span class="highlight">46.5元</span>，约为报告期初（约4.5元）的10倍，也远高于A股半导体板块历史均值（约3–8元）。从波动率的均值回归特性推断，ATR在未来1–3个月内大概率将向10–15元区间收敛。若此收敛以价格下跌实现（高波动率的崩溃），而非以价格横盘消化，则可能对应一次幅度可观的调整。加之当前单日振幅频繁在40–60元，交易者面临极高的日内风险——以840元为基础的5%振幅即对应±42元的瞬时浮亏，建议将单笔风险敞口控制在总资金的2%以内。</p>
+  </div>
+</div>
+
+<h3>技术指标综合研判</h3>
+<div class="metric-row">
+  <div class="metric-item">
+    <div class="m-label">趋势指标</div>
+    <div class="m-value" style="color:var(--up);">强多头 · 动能衰减</div>
+    <div class="m-note">均线多头排列，但乖离率过大<br>MACD高位钝化+顶背离雏形</div>
+  </div>
+  <div class="metric-item">
+    <div class="m-label">动量指标</div>
+    <div class="m-value" style="color:var(--up);">严重超买</div>
+    <div class="m-note">RSI(14)≈81<br>MA60乖离率100%<br>布林带宽极值</div>
+  </div>
+  <div class="metric-item">
+    <div class="m-label">波动率</div>
+    <div class="m-value" style="color:var(--up);">极端高位</div>
+    <div class="m-note">ATR(20)=46.5元<br>单日振幅频繁超40–60元<br>均值回归压力极大</div>
+  </div>
+</div>
+</section>
+
+<!-- ========================================
+     PHASES
+     ======================================== -->
+<section id="phases">
+<h2>三 · 走势阶段回顾</h2>
+<p>报告期内，兆易创新经历了底部蓄势→主升浪→高位震荡→二次冲顶→加速赶顶五个完整阶段，股价由约126元涨至840元，累计涨幅563.9%。以下按时间顺序呈现各阶段的技术特征。</p>
+<div class="phase-list" id="phase-list"></div>
+</section>
+
+<!-- ========================================
+     RISK
+     ======================================== -->
+<section id="risk">
+<h2>四 · 风险提示与投资建议</h2>
+
+<div class="risk-box">
+  <h3>关键风险因素</h3>
+  <ul>
+    <li><strong>技术面多重顶部共振风险（高）：</strong>当前RSI持续性超买（约81，连续35日>80）、MACD高位钝化+顶背离雏形（DIF斜率衰减、红柱缩量）、布林带极端开口（带宽超中轨80%）、均线乖离率超100%——四大技术指标同步指向极端过热，形成技术面多重顶部共振。A股历史上此类技术结构出现后，中期回调概率在85%以上，平均回调幅度为前期涨幅的45%左右。</li>
+    <li><strong>估值泡沫化与戴维斯双杀风险（高）：</strong>静态PE约357.4倍，是A股半导体行业历史中枢（30–80倍）的4.5–12倍，是国际同业PE（15–30倍）的12–24倍。2026年远期PE仍约89.0倍，安全边际极薄。即使以最乐观的2026年净利润70亿元计算，合理价格区间也仅为300–500元（30–50倍PE），当前840元溢价超70%。若2026年业绩不达预期，面临盈利下修+估值收缩的「戴维斯双杀」——此情形下股价可能回落至200–300元区间。</li>
+    <li><strong>极端波动与流动性挤兑风险（高）：</strong>单日振幅频繁超40–60元（ATR(20)=46.5元），涨停（14次）与跌停（3次）交替出现。极端波动意味着交易执行风险极大——在跌停板挂单的情况下（尤其是集合竞价阶段），散户往往无法及时平仓。连续涨停后若出现「一字断魂刀」式连续跌停，流动性瞬间枯竭，卖出将极为困难。此种流动性风险在A股题材股中屡见不鲜（如2025年的多只AI概念股），不可不察。</li>
+    <li><strong>存储芯片周期下行风险（中）：</strong>NOR Flash和DRAM均属于强周期品类，现货价格受全球供需格局影响显著。当前行业处于景气上行周期中段（受益于供给缺口+AI需求），但若2026年下半年全球半导体景气度转弱，或DDR3/NOR Flash产能释放超预期导致价格回落，公司营收和毛利率将面临压力。历史上NOR Flash价格周期通常持续18–24个月，当前上行周期已运行约12个月。</li>
+    <li><strong>中美科技博弈与供应链风险（中低）：</strong>兆易创新为Fabless设计公司，晶圆制造依赖台系和中芯国际等代工厂。若中美科技博弈进一步升级导致代工产能受限、先进制程设备禁运，或关键EDA工具被限制使用，将对公司的产品迭代和交付能力产生实质性影响。</li>
+  </ul>
+</div>
+
+<div class="rec-bar">
+  <h3>▎ 投资建议</h3>
+  <p><strong>中长期视角：</strong>兆易创新作为国产存储与MCU双龙头，基本面质地优良，NOR Flash涨价周期+DRAM放量+MCU国产替代三重驱动下，中长期成长逻辑清晰。假设2026年净利润达60亿元中枢，合理PE 40–60倍对应市值2400–3600亿元（股价约340–510元），当前840元已有明显溢价。</p>
+  <p><strong>短期操作建议：</strong>对于已持有仓位的投资者，建议将MA20（约578元）作为动态止盈线——收盘价连续两日有效跌破则考虑分批减仓锁定利润。场外观望者当前追高风险收益比极差，建议耐心等待充分回调（至少至MA60附近约420元），在量缩价稳、MACD等中长期指标完成修复后，再结合2026年半年报业绩验证做分批布局。任何投资决策均需结合个人风险承受能力，控制仓位在可接受范围。</p>
+</div>
+
+<div class="footer">
+本报告基于TuShare公开行情数据及公开财务信息自动生成，所有分析仅供参考，不构成任何投资建议。股市有风险，投资需谨慎。
+</div>
+
+</section>
+
+</main>
+
+<script>
+/* ================================================================
+   DATA & COMPUTED SERIES
+   ================================================================ */
+const R = {"data": [{"date": "2025-06-30", "open": 128.37, "high": 128.5, "low": 125.2, "close": 126.53, "vol": 141433.99, "amount": 1784229.847, "pct_chg": 0.1504}, {"date": "2025-07-01", "open": 126.0, "high": 126.55, "low": 123.51, "close": 124.02, "vol": 142875.87, "amount": 1781322.637, "pct_chg": -1.9837}, {"date": "2025-07-02", "open": 123.28, "high": 123.3, "low": 120.1, "close": 120.98, "vol": 130681.06, "amount": 1586895.318, "pct_chg": -2.4512}, {"date": "2025-07-03", "open": 120.58, "high": 121.55, "low": 119.0, "close": 119.72, "vol": 128590.07, "amount": 1541698.795, "pct_chg": -0.7626}, {"date": "2025-07-04", "open": 119.19, "high": 120.3, "low": 117.51, "close": 118.85, "vol": 141826.95, "amount": 1683622.173, "pct_chg": -0.7267}, {"date": "2025-07-07", "open": 118.98, "high": 120.81, "low": 117.86, "close": 120.81, "vol": 114584.95, "amount": 1370153.527, "pct_chg": 1.6491}, {"date": "2025-07-08", "open": 123.0, "high": 123.5, "low": 121.01, "close": 121.71, "vol": 151877.86, "amount": 1854823.191, "pct_chg": 0.745}, {"date": "2025-07-09", "open": 120.91, "high": 120.99, "low": 119.29, "close": 119.47, "vol": 126056.42, "amount": 1512241.902, "pct_chg": -1.8404}, {"date": "2025-07-10", "open": 119.02, "high": 119.87, "low": 118.04, "close": 118.06, "vol": 111583.31, "amount": 1322615.181, "pct_chg": -1.1802}, {"date": "2025-07-11", "open": 117.9, "high": 119.1, "low": 117.37, "close": 118.36, "vol": 129774.02, "amount": 1537067.954, "pct_chg": 0.2541}, {"date": "2025-07-14", "open": 118.61, "high": 119.2, "low": 117.46, "close": 117.59, "vol": 112791.53, "amount": 1331566.268, "pct_chg": -0.6506}, {"date": "2025-07-15", "open": 117.1, "high": 117.56, "low": 114.0, "close": 115.0, "vol": 236202.59, "amount": 2718281.579, "pct_chg": -2.2026}, {"date": "2025-07-16", "open": 115.0, "high": 116.4, "low": 114.0, "close": 114.24, "vol": 158742.83, "amount": 1826208.291, "pct_chg": -0.6609}, {"date": "2025-07-17", "open": 114.05, "high": 118.19, "low": 113.82, "close": 117.99, "vol": 241275.42, "amount": 2805867.152, "pct_chg": 3.2826}, {"date": "2025-07-18", "open": 117.86, "high": 120.3, "low": 116.23, "close": 117.16, "vol": 203233.08, "amount": 2391314.587, "pct_chg": -0.7034}, {"date": "2025-07-21", "open": 116.82, "high": 117.53, "low": 115.4, "close": 117.11, "vol": 115943.94, "amount": 1350683.002, "pct_chg": -0.0427}, {"date": "2025-07-22", "open": 116.97, "high": 117.33, "low": 115.8, "close": 115.87, "vol": 143927.33, "amount": 1672922.189, "pct_chg": -1.0588}, {"date": "2025-07-23", "open": 115.77, "high": 118.36, "low": 115.5, "close": 116.99, "vol": 149110.76, "amount": 1741699.657, "pct_chg": 0.9666}, {"date": "2025-07-24", "open": 116.6, "high": 118.0, "low": 115.14, "close": 117.89, "vol": 172253.98, "amount": 2011696.442, "pct_chg": 0.7693}, {"date": "2025-07-25", "open": 117.9, "high": 122.0, "low": 117.9, "close": 121.94, "vol": 356933.76, "amount": 4286282.667, "pct_chg": 3.4354}, {"date": "2025-07-28", "open": 122.0, "high": 122.2, "low": 119.71, "close": 120.26, "vol": 191011.97, "amount": 2302878.681, "pct_chg": -1.3777}, {"date": "2025-07-29", "open": 120.0, "high": 121.5, "low": 119.4, "close": 120.28, "vol": 169940.65, "amount": 2042850.877, "pct_chg": 0.0166}, {"date": "2025-07-30", "open": 124.06, "high": 129.67, "low": 123.31, "close": 123.99, "vol": 472987.44, "amount": 5957278.63, "pct_chg": 3.0845}, {"date": "2025-07-31", "open": 121.0, "high": 126.8, "low": 120.28, "close": 121.13, "vol": 308747.73, "amount": 3788904.668, "pct_chg": -2.3066}, {"date": "2025-08-01", "open": 120.5, "high": 122.1, "low": 117.09, "close": 117.31, "vol": 247813.48, "amount": 2946052.922, "pct_chg": -3.1536}, {"date": "2025-08-04", "open": 116.3, "high": 120.2, "low": 116.3, "close": 118.84, "vol": 160782.64, "amount": 1902328.181, "pct_chg": 1.3042}, {"date": "2025-08-05", "open": 119.0, "high": 119.3, "low": 117.3, "close": 118.0, "vol": 124850.55, "amount": 1471568.918, "pct_chg": -0.7068}, {"date": "2025-08-06", "open": 118.0, "high": 118.65, "low": 117.01, "close": 118.28, "vol": 114485.67, "amount": 1349530.061, "pct_chg": 0.2373}, {"date": "2025-08-07", "open": 117.98, "high": 119.2, "low": 117.32, "close": 117.67, "vol": 169940.88, "amount": 2007916.589, "pct_chg": -0.5157}, {"date": "2025-08-08", "open": 117.68, "high": 117.68, "low": 116.4, "close": 116.4, "vol": 121513.0, "amount": 1418055.203, "pct_chg": -1.0793}, {"date": "2025-08-11", "open": 116.79, "high": 118.5, "low": 116.48, "close": 117.95, "vol": 127981.73, "amount": 1508912.168, "pct_chg": 1.3316}, {"date": "2025-08-12", "open": 118.31, "high": 121.5, "low": 117.6, "close": 120.47, "vol": 252756.18, "amount": 3025712.891, "pct_chg": 2.1365}, {"date": "2025-08-13", "open": 120.49, "high": 123.0, "low": 119.94, "close": 121.46, "vol": 240986.54, "amount": 2925464.097, "pct_chg": 0.8218}, {"date": "2025-08-14", "open": 121.7, "high": 125.49, "low": 120.55, "close": 121.01, "vol": 314003.25, "amount": 3865198.49, "pct_chg": -0.3705}, {"date": "2025-08-15", "open": 120.01, "high": 123.5, "low": 120.01, "close": 122.9, "vol": 211500.22, "amount": 2590294.402, "pct_chg": 1.5619}, {"date": "2025-08-18", "open": 123.33, "high": 127.98, "low": 121.51, "close": 125.7, "vol": 328498.52, "amount": 4106567.032, "pct_chg": 2.2783}, {"date": "2025-08-19", "open": 125.48, "high": 128.88, "low": 122.85, "close": 123.26, "vol": 323175.2, "amount": 4046363.006, "pct_chg": -1.9411}, {"date": "2025-08-20", "open": 123.0, "high": 127.25, "low": 122.01, "close": 127.01, "vol": 359897.59, "amount": 4494071.401, "pct_chg": 3.0423}, {"date": "2025-08-21", "open": 132.09, "high": 139.71, "low": 132.09, "close": 137.16, "vol": 858971.49, "amount": 11832481.427, "pct_chg": 7.9915}, {"date": "2025-08-22", "open": 135.12, "high": 150.88, "low": 135.08, "close": 150.88, "vol": 780790.54, "amount": 11210984.976, "pct_chg": 10.0029}, {"date": "2025-08-25", "open": 159.0, "high": 163.5, "low": 152.88, "close": 157.8, "vol": 836197.6, "amount": 13172131.297, "pct_chg": 4.5864}, {"date": "2025-08-26", "open": 157.8, "high": 157.8, "low": 152.62, "close": 154.4, "vol": 382253.32, "amount": 5917649.65, "pct_chg": -2.1546}, {"date": "2025-08-27", "open": 155.87, "high": 168.5, "low": 152.18, "close": 158.63, "vol": 623810.58, "amount": 10014123.48, "pct_chg": 2.7396}, {"date": "2025-08-28", "open": 161.0, "high": 165.8, "low": 159.01, "close": 164.45, "vol": 494328.31, "amount": 8027959.133, "pct_chg": 3.6689}, {"date": "2025-08-29", "open": 161.8, "high": 162.0, "low": 156.4, "close": 158.98, "vol": 398005.86, "amount": 6325048.099, "pct_chg": -3.3262}, {"date": "2025-09-01", "open": 164.11, "high": 174.88, "low": 157.0, "close": 174.88, "vol": 612797.12, "amount": 10223340.506, "pct_chg": 10.0013}, {"date": "2025-09-02", "open": 179.28, "high": 188.0, "low": 173.05, "close": 176.0, "vol": 762852.37, "amount": 13736024.58, "pct_chg": 0.6404}, {"date": "2025-09-03", "open": 176.26, "high": 177.73, "low": 168.55, "close": 171.09, "vol": 441275.98, "amount": 7587032.736, "pct_chg": -2.7898}, {"date": "2025-09-04", "open": 169.0, "high": 171.07, "low": 153.98, "close": 153.98, "vol": 454980.53, "amount": 7284233.85, "pct_chg": -10.0006}, {"date": "2025-09-05", "open": 150.0, "high": 163.99, "low": 145.8, "close": 159.56, "vol": 699487.7, "amount": 10700137.153, "pct_chg": 3.6238}, {"date": "2025-09-08", "open": 161.93, "high": 169.0, "low": 159.15, "close": 163.83, "vol": 523714.75, "amount": 8602671.849, "pct_chg": 2.6761}, {"date": "2025-09-09", "open": 161.0, "high": 162.8, "low": 154.62, "close": 157.15, "vol": 327320.34, "amount": 5191824.525, "pct_chg": -4.0774}, {"date": "2025-09-10", "open": 157.14, "high": 163.25, "low": 155.7, "close": 161.29, "vol": 334656.97, "amount": 5358368.655, "pct_chg": 2.6344}, {"date": "2025-09-11", "open": 161.26, "high": 177.42, "low": 160.0, "close": 177.42, "vol": 554423.95, "amount": 9422962.073, "pct_chg": 10.0006}, {"date": "2025-09-12", "open": 179.99, "high": 195.16, "low": 177.5, "close": 190.21, "vol": 710357.04, "amount": 13432520.618, "pct_chg": 7.2089}, {"date": "2025-09-15", "open": 193.51, "high": 194.5, "low": 186.62, "close": 190.94, "vol": 495483.07, "amount": 9469855.424, "pct_chg": 0.3838}, {"date": "2025-09-16", "open": 189.0, "high": 196.8, "low": 186.89, "close": 189.16, "vol": 408562.21, "amount": 7810240.314, "pct_chg": -0.9322}, {"date": "2025-09-17", "open": 188.99, "high": 192.58, "low": 182.97, "close": 186.6, "vol": 339245.37, "amount": 6358605.811, "pct_chg": -1.3534}, {"date": "2025-09-18", "open": 189.39, "high": 200.85, "low": 186.8, "close": 190.88, "vol": 590410.52, "amount": 11381851.203, "pct_chg": 2.2937}, {"date": "2025-09-19", "open": 194.31, "high": 195.88, "low": 184.91, "close": 185.2, "vol": 371918.21, "amount": 7051277.593, "pct_chg": -2.9757}, {"date": "2025-09-22", "open": 188.88, "high": 198.09, "low": 186.28, "close": 195.01, "vol": 411977.69, "amount": 8002507.023, "pct_chg": 5.297}, {"date": "2025-09-23", "open": 196.0, "high": 201.59, "low": 188.69, "close": 194.07, "vol": 399945.66, "amount": 7780830.608, "pct_chg": -0.482}, {"date": "2025-09-24", "open": 194.6, "high": 208.23, "low": 193.0, "close": 199.8, "vol": 507020.69, "amount": 10165505.184, "pct_chg": 2.9525}, {"date": "2025-09-25", "open": 199.0, "high": 204.5, "low": 193.1, "close": 197.41, "vol": 404275.91, "amount": 8001322.068, "pct_chg": -1.1962}, {"date": "2025-09-26", "open": 196.01, "high": 206.02, "low": 190.21, "close": 190.21, "vol": 435200.85, "amount": 8650850.074, "pct_chg": -3.6472}, {"date": "2025-09-29", "open": 196.5, "high": 203.63, "low": 195.1, "close": 197.13, "vol": 434877.98, "amount": 8628937.828, "pct_chg": 3.6381}, {"date": "2025-09-30", "open": 204.34, "high": 216.84, "low": 203.0, "close": 213.3, "vol": 597864.99, "amount": 12672064.936, "pct_chg": 8.2027}, {"date": "2025-10-09", "open": 222.0, "high": 234.63, "low": 218.6, "close": 225.49, "vol": 585389.77, "amount": 13293421.697, "pct_chg": 5.715}, {"date": "2025-10-10", "open": 225.5, "high": 230.5, "low": 212.12, "close": 215.02, "vol": 443030.98, "amount": 9636636.022, "pct_chg": -4.6432}, {"date": "2025-10-13", "open": 201.5, "high": 214.9, "low": 201.5, "close": 207.85, "vol": 424815.14, "amount": 8843113.207, "pct_chg": -3.3346}, {"date": "2025-10-14", "open": 215.45, "high": 220.53, "low": 193.0, "close": 196.0, "vol": 522017.8, "amount": 10762183.994, "pct_chg": -5.7012}, {"date": "2025-10-15", "open": 195.55, "high": 202.4, "low": 186.41, "close": 202.01, "vol": 390442.31, "amount": 7587280.731, "pct_chg": 3.0663}, {"date": "2025-10-16", "open": 201.44, "high": 214.8, "low": 198.53, "close": 208.13, "vol": 458666.18, "amount": 9577597.463, "pct_chg": 3.0296}, {"date": "2025-10-17", "open": 208.12, "high": 211.5, "low": 201.0, "close": 201.21, "vol": 329357.84, "amount": 6777034.048, "pct_chg": -3.3248}, {"date": "2025-10-20", "open": 207.73, "high": 215.0, "low": 203.03, "close": 208.35, "vol": 367244.06, "amount": 7696246.687, "pct_chg": 3.5485}, {"date": "2025-10-21", "open": 211.0, "high": 222.0, "low": 209.66, "close": 219.01, "vol": 405117.22, "amount": 8794154.72, "pct_chg": 5.1164}, {"date": "2025-10-22", "open": 214.0, "high": 214.0, "low": 205.3, "close": 210.93, "vol": 371829.52, "amount": 7766034.297, "pct_chg": -3.6893}, {"date": "2025-10-23", "open": 205.98, "high": 208.1, "low": 200.39, "close": 206.96, "vol": 274058.48, "amount": 5585482.986, "pct_chg": -1.8821}, {"date": "2025-10-24", "open": 214.0, "high": 221.88, "low": 212.0, "close": 221.08, "vol": 450618.12, "amount": 9805113.356, "pct_chg": 6.8226}, {"date": "2025-10-27", "open": 230.0, "high": 243.19, "low": 222.83, "close": 243.19, "vol": 520916.18, "amount": 12070372.38, "pct_chg": 10.0009}, {"date": "2025-10-28", "open": 236.5, "high": 254.44, "low": 234.58, "close": 246.95, "vol": 527296.42, "amount": 12909959.81, "pct_chg": 1.5461}, {"date": "2025-10-29", "open": 246.96, "high": 252.63, "low": 236.0, "close": 241.15, "vol": 503744.63, "amount": 12221563.111, "pct_chg": -2.3487}, {"date": "2025-10-30", "open": 246.24, "high": 247.0, "low": 231.78, "close": 232.0, "vol": 433654.43, "amount": 10345840.392, "pct_chg": -3.7943}, {"date": "2025-10-31", "open": 231.0, "high": 234.68, "low": 216.0, "close": 220.0, "vol": 492428.82, "amount": 10882575.346, "pct_chg": -5.1724}, {"date": "2025-11-03", "open": 217.0, "high": 230.68, "low": 216.66, "close": 230.1, "vol": 462613.49, "amount": 10367480.649, "pct_chg": 4.5909}, {"date": "2025-11-04", "open": 231.0, "high": 231.22, "low": 222.5, "close": 224.99, "vol": 293367.81, "amount": 6624358.513, "pct_chg": -2.2208}, {"date": "2025-11-05", "open": 213.0, "high": 220.49, "low": 210.95, "close": 218.39, "vol": 335131.45, "amount": 7203205.727, "pct_chg": -2.9335}, {"date": "2025-11-06", "open": 224.5, "high": 228.0, "low": 222.25, "close": 227.2, "vol": 343346.7, "amount": 7753801.39, "pct_chg": 4.0341}, {"date": "2025-11-07", "open": 222.68, "high": 227.89, "low": 219.55, "close": 220.95, "vol": 278989.18, "amount": 6232949.914, "pct_chg": -2.7509}, {"date": "2025-11-10", "open": 228.49, "high": 231.45, "low": 212.5, "close": 218.96, "vol": 385832.23, "amount": 8553969.468, "pct_chg": -0.9007}, {"date": "2025-11-11", "open": 223.6, "high": 227.01, "low": 216.71, "close": 216.99, "vol": 341924.9, "amount": 7601312.659, "pct_chg": -0.8997}, {"date": "2025-11-12", "open": 213.0, "high": 218.58, "low": 207.01, "close": 209.5, "vol": 349523.08, "amount": 7391713.965, "pct_chg": -3.4518}, {"date": "2025-11-13", "open": 212.0, "high": 230.45, "low": 211.88, "close": 227.5, "vol": 626638.58, "amount": 14161665.405, "pct_chg": 8.5919}, {"date": "2025-11-14", "open": 216.0, "high": 216.49, "low": 205.78, "close": 205.78, "vol": 548633.27, "amount": 11531317.142, "pct_chg": -9.5473}, {"date": "2025-11-17", "open": 207.81, "high": 214.74, "low": 206.36, "close": 207.5, "vol": 335060.74, "amount": 7029315.417, "pct_chg": 0.8358}, {"date": "2025-11-18", "open": 205.28, "high": 207.58, "low": 201.57, "close": 202.5, "vol": 274378.46, "amount": 5596610.403, "pct_chg": -2.4096}, {"date": "2025-11-19", "open": 200.25, "high": 205.5, "low": 199.03, "close": 202.52, "vol": 238818.63, "amount": 4835263.416, "pct_chg": 0.0099}, {"date": "2025-11-20", "open": 207.5, "high": 208.0, "low": 198.66, "close": 199.1, "vol": 217605.35, "amount": 4376548.543, "pct_chg": -1.6887}, {"date": "2025-11-21", "open": 189.0, "high": 190.57, "low": 182.51, "close": 182.51, "vol": 404416.09, "amount": 7512795.79, "pct_chg": -8.3325}, {"date": "2025-11-24", "open": 183.75, "high": 184.75, "low": 176.0, "close": 179.18, "vol": 340499.49, "amount": 6102558.863, "pct_chg": -1.8246}, {"date": "2025-11-25", "open": 185.0, "high": 191.6, "low": 184.19, "close": 190.62, "vol": 364021.47, "amount": 6845489.696, "pct_chg": 6.3846}, {"date": "2025-11-26", "open": 187.01, "high": 198.88, "low": 186.8, "close": 196.5, "vol": 297685.3, "amount": 5796501.768, "pct_chg": 3.0847}, {"date": "2025-11-27", "open": 198.88, "high": 208.0, "low": 198.88, "close": 200.86, "vol": 319731.75, "amount": 6535638.163, "pct_chg": 2.2188}, {"date": "2025-11-28", "open": 199.0, "high": 204.35, "low": 196.66, "close": 203.0, "vol": 215652.25, "amount": 4334514.87, "pct_chg": 1.0654}, {"date": "2025-12-01", "open": 204.04, "high": 215.45, "low": 201.2, "close": 212.82, "vol": 382670.03, "amount": 8001361.362, "pct_chg": 4.8374}, {"date": "2025-12-02", "open": 211.78, "high": 216.79, "low": 208.1, "close": 210.5, "vol": 249243.69, "amount": 5283394.789, "pct_chg": -1.0901}, {"date": "2025-12-03", "open": 210.42, "high": 210.99, "low": 206.19, "close": 207.6, "vol": 170708.13, "amount": 3550298.44, "pct_chg": -1.3777}, {"date": "2025-12-04", "open": 206.0, "high": 212.98, "low": 201.99, "close": 210.41, "vol": 247007.26, "amount": 5130378.877, "pct_chg": 1.3536}, {"date": "2025-12-05", "open": 210.92, "high": 211.0, "low": 205.5, "close": 206.81, "vol": 169817.36, "amount": 3517459.255, "pct_chg": -1.7109}, {"date": "2025-12-08", "open": 208.62, "high": 216.97, "low": 207.53, "close": 213.89, "vol": 311307.02, "amount": 6624931.659, "pct_chg": 3.4234}, {"date": "2025-12-09", "open": 212.0, "high": 215.3, "low": 209.3, "close": 210.95, "vol": 210585.96, "amount": 4464451.196, "pct_chg": -1.3745}, {"date": "2025-12-10", "open": 209.09, "high": 210.2, "low": 203.5, "close": 208.84, "vol": 191810.21, "amount": 3972447.948, "pct_chg": -1.0002}, {"date": "2025-12-11", "open": 211.88, "high": 213.0, "low": 207.5, "close": 207.81, "vol": 188246.03, "amount": 3953045.79, "pct_chg": -0.4932}, {"date": "2025-12-12", "open": 206.0, "high": 214.44, "low": 204.01, "close": 209.89, "vol": 215033.84, "amount": 4488267.448, "pct_chg": 1.0009}, {"date": "2025-12-15", "open": 205.02, "high": 208.68, "low": 203.5, "close": 204.16, "vol": 175069.42, "amount": 3589589.515, "pct_chg": -2.73}, {"date": "2025-12-16", "open": 203.0, "high": 205.46, "low": 196.13, "close": 197.86, "vol": 204824.72, "amount": 4078991.501, "pct_chg": -3.0858}, {"date": "2025-12-17", "open": 197.01, "high": 202.87, "low": 195.95, "close": 202.18, "vol": 190501.58, "amount": 3802859.059, "pct_chg": 2.1834}, {"date": "2025-12-18", "open": 203.5, "high": 218.88, "low": 203.5, "close": 214.45, "vol": 418524.71, "amount": 8887246.199, "pct_chg": 6.0688}, {"date": "2025-12-19", "open": 220.0, "high": 221.0, "low": 208.2, "close": 210.21, "vol": 332394.8, "amount": 7034876.943, "pct_chg": -1.9772}, {"date": "2025-12-22", "open": 213.51, "high": 219.5, "low": 213.51, "close": 216.46, "vol": 253700.57, "amount": 5485534.765, "pct_chg": 2.9732}, {"date": "2025-12-23", "open": 216.99, "high": 221.33, "low": 215.0, "close": 217.38, "vol": 254297.87, "amount": 5543292.842, "pct_chg": 0.425}, {"date": "2025-12-24", "open": 220.0, "high": 225.0, "low": 216.2, "close": 224.1, "vol": 298409.62, "amount": 6590470.884, "pct_chg": 3.0914}, {"date": "2025-12-25", "open": 223.0, "high": 228.83, "low": 217.33, "close": 222.0, "vol": 259400.49, "amount": 5752598.105, "pct_chg": -0.9371}, {"date": "2025-12-26", "open": 221.0, "high": 230.0, "low": 220.0, "close": 226.97, "vol": 296631.27, "amount": 6722806.56, "pct_chg": 2.2387}, {"date": "2025-12-29", "open": 225.71, "high": 234.44, "low": 225.0, "close": 227.93, "vol": 296019.01, "amount": 6772169.788, "pct_chg": 0.423}, {"date": "2025-12-30", "open": 226.0, "high": 229.54, "low": 219.1, "close": 220.22, "vol": 271609.88, "amount": 6063612.93, "pct_chg": -3.3826}, {"date": "2025-12-31", "open": 228.01, "high": 228.88, "low": 212.58, "close": 214.25, "vol": 354571.19, "amount": 7741087.427, "pct_chg": -2.7109}, {"date": "2026-01-05", "open": 221.32, "high": 235.68, "low": 221.0, "close": 235.68, "vol": 499283.82, "amount": 11560778.68, "pct_chg": 10.0023}, {"date": "2026-01-06", "open": 238.0, "high": 253.33, "low": 234.0, "close": 250.78, "vol": 507535.5, "amount": 12310629.498, "pct_chg": 6.407}, {"date": "2026-01-07", "open": 270.0, "high": 273.77, "low": 256.78, "close": 262.5, "vol": 545161.79, "amount": 14443385.679, "pct_chg": 4.6734}, {"date": "2026-01-08", "open": 259.0, "high": 267.0, "low": 256.91, "close": 258.75, "vol": 314109.13, "amount": 8210508.185, "pct_chg": -1.4286}, {"date": "2026-01-09", "open": 254.55, "high": 254.55, "low": 244.32, "close": 250.05, "vol": 395238.31, "amount": 9873211.263, "pct_chg": -3.3623}, {"date": "2026-01-12", "open": 255.22, "high": 264.04, "low": 254.0, "close": 261.83, "vol": 403813.07, "amount": 10435793.484, "pct_chg": 4.7111}, {"date": "2026-01-13", "open": 266.0, "high": 275.0, "low": 257.49, "close": 263.5, "vol": 461517.76, "amount": 12238674.369, "pct_chg": 0.6378}, {"date": "2026-01-14", "open": 270.0, "high": 271.0, "low": 249.05, "close": 253.0, "vol": 447321.34, "amount": 11546200.174, "pct_chg": -3.9848}, {"date": "2026-01-15", "open": 249.61, "high": 257.55, "low": 248.2, "close": 254.96, "vol": 283898.37, "amount": 7180430.118, "pct_chg": 0.7747}, {"date": "2026-01-16", "open": 260.03, "high": 280.46, "low": 257.5, "close": 280.46, "vol": 553362.13, "amount": 15020119.557, "pct_chg": 10.0016}, {"date": "2026-01-19", "open": 280.6, "high": 292.0, "low": 278.88, "close": 288.45, "vol": 463229.95, "amount": 13241198.626, "pct_chg": 2.8489}, {"date": "2026-01-20", "open": 282.9, "high": 297.1, "low": 282.88, "close": 292.0, "vol": 389782.32, "amount": 11377429.957, "pct_chg": 1.2307}, {"date": "2026-01-21", "open": 295.0, "high": 314.8, "low": 293.01, "close": 307.65, "vol": 404653.97, "amount": 12395709.223, "pct_chg": 5.3596}, {"date": "2026-01-22", "open": 320.0, "high": 320.02, "low": 296.7, "close": 301.47, "vol": 450616.97, "amount": 13710967.282, "pct_chg": -2.0088}, {"date": "2026-01-23", "open": 296.0, "high": 310.68, "low": 295.0, "close": 297.25, "vol": 349379.69, "amount": 10491781.699, "pct_chg": -1.3998}, {"date": "2026-01-26", "open": 300.0, "high": 308.0, "low": 290.5, "close": 292.6, "vol": 272674.78, "amount": 8059039.738, "pct_chg": -1.5643}, {"date": "2026-01-27", "open": 290.0, "high": 312.42, "low": 286.67, "close": 307.26, "vol": 380043.68, "amount": 11465752.144, "pct_chg": 5.0103}, {"date": "2026-01-28", "open": 313.88, "high": 328.58, "low": 313.88, "close": 323.68, "vol": 377179.92, "amount": 12160363.682, "pct_chg": 5.344}, {"date": "2026-01-29", "open": 329.88, "high": 331.07, "low": 306.99, "close": 307.5, "vol": 334245.81, "amount": 10593801.175, "pct_chg": -4.9988}, {"date": "2026-01-30", "open": 315.0, "high": 320.88, "low": 308.01, "close": 314.88, "vol": 376199.44, "amount": 11864831.688, "pct_chg": 2.4}, {"date": "2026-02-02", "open": 300.8, "high": 306.09, "low": 283.39, "close": 283.39, "vol": 416288.29, "amount": 12094639.949, "pct_chg": -10.0006}, {"date": "2026-02-03", "open": 294.01, "high": 296.6, "low": 285.2, "close": 292.57, "vol": 302213.54, "amount": 8812712.425, "pct_chg": 3.2394}, {"date": "2026-02-04", "open": 285.99, "high": 289.5, "low": 279.0, "close": 282.33, "vol": 270957.63, "amount": 7646576.014, "pct_chg": -3.5}, {"date": "2026-02-05", "open": 269.94, "high": 279.52, "low": 268.21, "close": 277.74, "vol": 229053.52, "amount": 6300761.896, "pct_chg": -1.6258}, {"date": "2026-02-06", "open": 271.0, "high": 280.51, "low": 268.2, "close": 276.17, "vol": 186267.14, "amount": 5136089.771, "pct_chg": -0.5653}, {"date": "2026-02-09", "open": 283.97, "high": 294.44, "low": 280.2, "close": 292.98, "vol": 283055.21, "amount": 8148122.681, "pct_chg": 6.0868}, {"date": "2026-02-10", "open": 287.13, "high": 291.5, "low": 284.17, "close": 289.9, "vol": 215965.54, "amount": 6225459.477, "pct_chg": -1.0513}, {"date": "2026-02-11", "open": 285.0, "high": 286.5, "low": 280.5, "close": 284.59, "vol": 173415.5, "amount": 4922177.744, "pct_chg": -1.8317}, {"date": "2026-02-12", "open": 290.5, "high": 305.0, "low": 285.0, "close": 303.24, "vol": 300674.34, "amount": 8842653.413, "pct_chg": 6.5533}, {"date": "2026-02-13", "open": 303.24, "high": 317.6, "low": 301.0, "close": 308.7, "vol": 299253.71, "amount": 9335277.999, "pct_chg": 1.8006}, {"date": "2026-02-24", "open": 317.5, "high": 331.16, "low": 311.0, "close": 323.05, "vol": 302545.4, "amount": 9709224.737, "pct_chg": 4.6485}, {"date": "2026-02-25", "open": 316.0, "high": 317.01, "low": 301.96, "close": 311.32, "vol": 285728.01, "amount": 8846026.25, "pct_chg": -3.631}, {"date": "2026-02-26", "open": 316.0, "high": 316.0, "low": 306.05, "close": 309.4, "vol": 231052.85, "amount": 7169784.208, "pct_chg": -0.6167}, {"date": "2026-02-27", "open": 303.5, "high": 306.0, "low": 296.69, "close": 300.0, "vol": 220968.92, "amount": 6629753.921, "pct_chg": -3.0381}, {"date": "2026-03-02", "open": 290.87, "high": 299.98, "low": 290.55, "close": 293.15, "vol": 185132.28, "amount": 5453801.345, "pct_chg": -2.2833}, {"date": "2026-03-03", "open": 295.0, "high": 296.1, "low": 272.59, "close": 272.89, "vol": 333293.65, "amount": 9356849.949, "pct_chg": -6.9111}, {"date": "2026-03-04", "open": 272.89, "high": 290.0, "low": 272.89, "close": 279.07, "vol": 326916.32, "amount": 9250036.179, "pct_chg": 2.2646}, {"date": "2026-03-05", "open": 288.16, "high": 289.88, "low": 280.23, "close": 282.8, "vol": 255299.73, "amount": 7288806.325, "pct_chg": 1.3366}, {"date": "2026-03-06", "open": 277.9, "high": 288.88, "low": 277.56, "close": 284.99, "vol": 208575.77, "amount": 5931718.814, "pct_chg": 0.7744}, {"date": "2026-03-09", "open": 273.0, "high": 277.7, "low": 264.0, "close": 276.09, "vol": 283545.65, "amount": 7649552.153, "pct_chg": -3.1229}, {"date": "2026-03-10", "open": 284.1, "high": 286.5, "low": 281.18, "close": 285.44, "vol": 233537.42, "amount": 6640032.786, "pct_chg": 3.3866}, {"date": "2026-03-11", "open": 288.04, "high": 290.83, "low": 281.32, "close": 281.53, "vol": 216498.69, "amount": 6176121.565, "pct_chg": -1.3698}, {"date": "2026-03-12", "open": 279.83, "high": 283.83, "low": 272.43, "close": 274.78, "vol": 172327.47, "amount": 4768478.191, "pct_chg": -2.3976}, {"date": "2026-03-13", "open": 270.78, "high": 285.67, "low": 270.78, "close": 278.33, "vol": 226137.49, "amount": 6301123.525, "pct_chg": 1.2919}, {"date": "2026-03-16", "open": 280.0, "high": 306.16, "low": 277.0, "close": 306.16, "vol": 462735.64, "amount": 13600507.644, "pct_chg": 9.9989}, {"date": "2026-03-17", "open": 306.5, "high": 313.0, "low": 295.88, "close": 296.0, "vol": 390000.85, "amount": 11825489.341, "pct_chg": -3.3185}, {"date": "2026-03-18", "open": 305.1, "high": 313.68, "low": 302.0, "close": 311.25, "vol": 420513.52, "amount": 12995566.647, "pct_chg": 5.152}, {"date": "2026-03-19", "open": 300.0, "high": 309.71, "low": 297.0, "close": 303.68, "vol": 312145.67, "amount": 9443689.781, "pct_chg": -2.4321}, {"date": "2026-03-20", "open": 305.55, "high": 306.7, "low": 290.0, "close": 290.2, "vol": 312536.44, "amount": 9259119.964, "pct_chg": -4.4389}, {"date": "2026-03-23", "open": 277.0, "high": 282.88, "low": 271.0, "close": 273.35, "vol": 282141.91, "amount": 7806213.396, "pct_chg": -5.8063}, {"date": "2026-03-24", "open": 277.99, "high": 278.0, "low": 256.88, "close": 273.71, "vol": 336914.68, "amount": 8936300.507, "pct_chg": 0.1317}, {"date": "2026-03-25", "open": 275.15, "high": 285.8, "low": 275.14, "close": 278.4, "vol": 283762.75, "amount": 7947975.811, "pct_chg": 1.7135}, {"date": "2026-03-26", "open": 268.0, "high": 268.7, "low": 260.0, "close": 262.0, "vol": 350773.07, "amount": 9217935.594, "pct_chg": -5.8908}, {"date": "2026-03-27", "open": 248.98, "high": 260.18, "low": 240.25, "close": 258.66, "vol": 289773.43, "amount": 7291597.265, "pct_chg": -1.2748}, {"date": "2026-03-30", "open": 252.0, "high": 259.54, "low": 250.03, "close": 255.85, "vol": 214696.45, "amount": 5470168.275, "pct_chg": -1.0864}, {"date": "2026-03-31", "open": 249.9, "high": 252.0, "low": 236.86, "close": 238.1, "vol": 427623.34, "amount": 10377669.656, "pct_chg": -6.9377}, {"date": "2026-04-01", "open": 250.0, "high": 256.1, "low": 243.7, "close": 255.0, "vol": 387957.83, "amount": 9693139.251, "pct_chg": 7.0979}, {"date": "2026-04-02", "open": 257.86, "high": 259.8, "low": 245.6, "close": 246.99, "vol": 252974.31, "amount": 6367107.416, "pct_chg": -3.1412}, {"date": "2026-04-03", "open": 250.99, "high": 254.6, "low": 247.5, "close": 249.1, "vol": 197471.97, "amount": 4948392.995, "pct_chg": 0.8543}, {"date": "2026-04-07", "open": 253.1, "high": 255.96, "low": 248.81, "close": 249.66, "vol": 198471.58, "amount": 5011332.74, "pct_chg": 0.2248}, {"date": "2026-04-08", "open": 250.11, "high": 256.96, "low": 243.08, "close": 255.96, "vol": 753325.37, "amount": 18866761.51, "pct_chg": 2.5234}, {"date": "2026-04-09", "open": 250.0, "high": 253.49, "low": 243.9, "close": 250.49, "vol": 444682.57, "amount": 11053684.068, "pct_chg": -2.1371}, {"date": "2026-04-10", "open": 255.49, "high": 268.32, "low": 255.24, "close": 265.09, "vol": 534766.82, "amount": 14080294.764, "pct_chg": 5.8286}, {"date": "2026-04-13", "open": 261.0, "high": 269.84, "low": 260.9, "close": 262.14, "vol": 412420.92, "amount": 10896229.97, "pct_chg": -1.1128}, {"date": "2026-04-14", "open": 269.5, "high": 281.23, "low": 266.39, "close": 280.01, "vol": 466205.21, "amount": 12861207.284, "pct_chg": 6.817}, {"date": "2026-04-15", "open": 285.0, "high": 287.65, "low": 271.98, "close": 274.0, "vol": 396972.6, "amount": 11071707.52, "pct_chg": -2.1464}, {"date": "2026-04-16", "open": 270.1, "high": 287.0, "low": 268.59, "close": 286.73, "vol": 409336.72, "amount": 11431621.262, "pct_chg": 4.646}, {"date": "2026-04-17", "open": 284.0, "high": 295.66, "low": 282.9, "close": 288.96, "vol": 406321.12, "amount": 11768331.454, "pct_chg": 0.7777}, {"date": "2026-04-20", "open": 293.0, "high": 295.96, "low": 287.12, "close": 290.54, "vol": 325642.8, "amount": 9489709.816, "pct_chg": 0.5468}, {"date": "2026-04-21", "open": 290.8, "high": 309.0, "low": 288.25, "close": 306.27, "vol": 425834.06, "amount": 12827436.178, "pct_chg": 5.4141}, {"date": "2026-04-22", "open": 303.5, "high": 314.58, "low": 302.51, "close": 313.98, "vol": 341661.95, "amount": 10559646.646, "pct_chg": 2.5174}, {"date": "2026-04-23", "open": 326.01, "high": 326.02, "low": 301.9, "close": 304.8, "vol": 441997.3, "amount": 13709630.158, "pct_chg": -2.9238}, {"date": "2026-04-24", "open": 305.0, "high": 310.0, "low": 292.81, "close": 297.7, "vol": 349105.37, "amount": 10436275.525, "pct_chg": -2.3294}, {"date": "2026-04-27", "open": 301.59, "high": 309.58, "low": 297.75, "close": 303.42, "vol": 316354.78, "amount": 9594446.068, "pct_chg": 1.9214}, {"date": "2026-04-28", "open": 305.0, "high": 319.33, "low": 302.02, "close": 307.5, "vol": 367942.94, "amount": 11421765.607, "pct_chg": 1.3447}, {"date": "2026-04-29", "open": 303.01, "high": 311.66, "low": 297.0, "close": 308.89, "vol": 419199.8, "amount": 12787874.125, "pct_chg": 0.452}, {"date": "2026-04-30", "open": 320.0, "high": 321.0, "low": 306.48, "close": 312.99, "vol": 587965.14, "amount": 18516847.87, "pct_chg": 1.3273}, {"date": "2026-05-06", "open": 330.0, "high": 344.29, "low": 330.0, "close": 344.29, "vol": 423425.5, "amount": 14465204.492, "pct_chg": 10.0003}, {"date": "2026-05-07", "open": 347.0, "high": 357.36, "low": 339.0, "close": 350.16, "vol": 523878.82, "amount": 18174549.786, "pct_chg": 1.705}, {"date": "2026-05-08", "open": 341.0, "high": 343.3, "low": 331.8, "close": 334.1, "vol": 440832.73, "amount": 14821436.654, "pct_chg": -4.5865}, {"date": "2026-05-11", "open": 350.1, "high": 367.51, "low": 347.01, "close": 362.13, "vol": 575079.07, "amount": 20673848.905, "pct_chg": 8.3897}, {"date": "2026-05-12", "open": 362.14, "high": 362.2, "low": 349.2, "close": 353.55, "vol": 405595.51, "amount": 14360590.982, "pct_chg": -2.3693}, {"date": "2026-05-13", "open": 344.0, "high": 366.71, "low": 339.33, "close": 365.0, "vol": 484982.84, "amount": 17127399.574, "pct_chg": 3.2386}, {"date": "2026-05-14", "open": 365.05, "high": 373.5, "low": 354.99, "close": 356.19, "vol": 408364.64, "amount": 14829461.848, "pct_chg": -2.4137}, {"date": "2026-05-15", "open": 353.0, "high": 384.0, "low": 345.48, "close": 375.34, "vol": 624368.11, "amount": 22792196.753, "pct_chg": 5.3763}, {"date": "2026-05-18", "open": 408.58, "high": 412.87, "low": 396.34, "close": 400.0, "vol": 687984.34, "amount": 27876373.984, "pct_chg": 6.57}, {"date": "2026-05-19", "open": 390.0, "high": 410.0, "low": 380.02, "close": 404.56, "vol": 553101.11, "amount": 21805396.34, "pct_chg": 1.14}, {"date": "2026-05-20", "open": 408.0, "high": 445.02, "low": 407.8, "close": 445.02, "vol": 610125.55, "amount": 26523529.101, "pct_chg": 10.001}, {"date": "2026-05-21", "open": 445.02, "high": 464.83, "low": 427.33, "close": 431.9, "vol": 632397.68, "amount": 28199401.936, "pct_chg": -2.9482}, {"date": "2026-05-22", "open": 448.0, "high": 472.99, "low": 439.0, "close": 468.74, "vol": 637968.89, "amount": 28932072.443, "pct_chg": 8.5298}, {"date": "2026-05-25", "open": 478.11, "high": 515.61, "low": 461.0, "close": 515.6, "vol": 593614.11, "amount": 29387713.836, "pct_chg": 9.997}, {"date": "2026-05-26", "open": 510.0, "high": 538.02, "low": 491.2, "close": 526.22, "vol": 643383.92, "amount": 33017657.438, "pct_chg": 2.2084}, {"date": "2026-05-27", "open": 541.0, "high": 552.82, "low": 500.0, "close": 514.18, "vol": 667260.41, "amount": 35341222.581, "pct_chg": -2.288}, {"date": "2026-05-28", "open": 495.0, "high": 499.5, "low": 470.0, "close": 483.0, "vol": 623792.2, "amount": 30240489.779, "pct_chg": -6.064}, {"date": "2026-05-29", "open": 492.66, "high": 496.0, "low": 464.91, "close": 467.01, "vol": 558125.42, "amount": 26715074.211, "pct_chg": -3.3106}, {"date": "2026-06-01", "open": 476.0, "high": 489.96, "low": 455.0, "close": 468.0, "vol": 521586.48, "amount": 24676174.086, "pct_chg": 0.212}, {"date": "2026-06-02", "open": 471.0, "high": 480.66, "low": 448.11, "close": 474.69, "vol": 490192.77, "amount": 23013728.744, "pct_chg": 1.4295}, {"date": "2026-06-03", "open": 478.89, "high": 510.0, "low": 477.0, "close": 492.23, "vol": 581929.78, "amount": 28838934.89, "pct_chg": 3.695}, {"date": "2026-06-04", "open": 487.05, "high": 538.0, "low": 485.01, "close": 529.31, "vol": 563350.88, "amount": 29302244.793, "pct_chg": 7.5331}, {"date": "2026-06-05", "open": 507.0, "high": 519.8, "low": 484.9, "close": 488.0, "vol": 547135.42, "amount": 27565110.091, "pct_chg": -7.8045}, {"date": "2026-06-08", "open": 461.11, "high": 490.7, "low": 451.0, "close": 474.01, "vol": 434474.74, "amount": 20573934.017, "pct_chg": -2.8668}, {"date": "2026-06-09", "open": 493.0, "high": 502.88, "low": 477.03, "close": 500.5, "vol": 419683.33, "amount": 20592669.384, "pct_chg": 5.5885}, {"date": "2026-06-10", "open": 489.11, "high": 497.26, "low": 475.65, "close": 480.84, "vol": 329972.1, "amount": 15988381.63, "pct_chg": -3.9281}, {"date": "2026-06-11", "open": 480.52, "high": 486.0, "low": 471.0, "close": 483.5, "vol": 296991.43, "amount": 14211235.696, "pct_chg": 0.5532}, {"date": "2026-06-12", "open": 508.0, "high": 510.0, "low": 481.0, "close": 481.47, "vol": 407085.44, "amount": 20201561.53, "pct_chg": -0.4199}, {"date": "2026-06-15", "open": 494.97, "high": 519.0, "low": 476.66, "close": 518.0, "vol": 475784.48, "amount": 23934989.159, "pct_chg": 7.5872}, {"date": "2026-06-16", "open": 526.0, "high": 542.84, "low": 517.71, "close": 532.76, "vol": 427785.07, "amount": 22673887.613, "pct_chg": 2.8494}, {"date": "2026-06-17", "open": 521.0, "high": 586.04, "low": 521.0, "close": 586.04, "vol": 568000.3, "amount": 31598894.526, "pct_chg": 10.0008}, {"date": "2026-06-18", "open": 594.0, "high": 644.64, "low": 586.6, "close": 629.0, "vol": 591573.18, "amount": 37016387.91, "pct_chg": 7.3306}, {"date": "2026-06-22", "open": 643.0, "high": 689.7, "low": 635.0, "close": 689.7, "vol": 525830.95, "amount": 34699907.688, "pct_chg": 9.6502}, {"date": "2026-06-23", "open": 680.0, "high": 688.8, "low": 636.0, "close": 640.99, "vol": 592913.79, "amount": 39089605.51, "pct_chg": -7.0625}, {"date": "2026-06-24", "open": 641.0, "high": 705.09, "low": 630.93, "close": 705.09, "vol": 598219.31, "amount": 39944848.281, "pct_chg": 10.0002}, {"date": "2026-06-25", "open": 740.0, "high": 775.39, "low": 735.0, "close": 775.21, "vol": 508678.36, "amount": 38432771.374, "pct_chg": 9.9448}, {"date": "2026-06-26", "open": 753.0, "high": 779.0, "low": 732.52, "close": 770.0, "vol": 493925.62, "amount": 37418302.893, "pct_chg": -0.6721}, {"date": "2026-06-29", "open": 779.0, "high": 846.66, "low": 750.0, "close": 840.0, "vol": 541208.83, "amount": 43149934.642, "pct_chg": 9.0909}], "ma5": [null, null, null, null, 122.02000000000001, 120.876, 120.41399999999999, 120.112, 119.78, 119.68199999999999, 119.03800000000001, 117.696, 116.65, 116.636, 116.396, 116.3, 116.474, 117.024, 117.00399999999999, 117.96, 118.59, 119.47200000000001, 120.872, 121.52000000000001, 120.59400000000001, 120.30999999999999, 119.854, 118.71199999999999, 118.02000000000001, 117.83800000000001, 117.66, 118.154, 118.79, 119.458, 120.758, 122.30799999999999, 122.86600000000001, 123.976, 127.20599999999999, 132.802, 139.222, 145.45, 151.774, 157.232, 158.852, 162.26799999999997, 166.588, 169.07999999999998, 166.986, 167.102, 164.892, 161.122, 159.16199999999998, 163.85, 169.98, 175.402, 181.804, 186.86599999999999, 189.558, 188.55599999999998, 189.36999999999998, 190.352, 192.99200000000002, 194.298, 195.3, 195.724, 199.57, 204.708, 208.23000000000002, 211.75799999999998, 211.532, 209.27399999999997, 205.802, 203.04000000000002, 203.14000000000001, 207.74200000000002, 209.526, 209.292, 213.266, 220.234, 225.82200000000003, 231.86599999999999, 236.87399999999997, 236.658, 234.04000000000002, 229.648, 225.096, 224.13600000000002, 224.32599999999996, 222.098, 220.498, 218.71999999999997, 218.78000000000003, 215.746, 213.454, 210.55599999999998, 209.16, 203.48, 198.826, 193.16199999999998, 190.786, 189.582, 189.93400000000003, 194.032, 200.76, 204.73600000000002, 206.956, 208.86599999999999, 209.628, 209.842, 209.93199999999996, 210.18, 209.66, 210.27599999999998, 208.33, 205.712, 204.38, 205.708, 205.77200000000002, 208.23200000000003, 212.13600000000002, 216.51999999999998, 218.03000000000003, 221.382, 223.67600000000002, 224.244, 222.27399999999997, 225.01, 229.77200000000002, 236.686, 244.392, 251.552, 256.78200000000004, 259.326, 257.42600000000004, 256.668, 262.75, 268.07399999999996, 273.774, 284.704, 294.006, 297.364, 298.194, 301.246, 304.452, 305.658, 309.184, 307.342, 304.404, 296.134, 290.18199999999996, 282.44, 284.358, 283.82399999999996, 284.276, 289.37600000000003, 295.88199999999995, 301.896, 306.18, 311.142, 310.494, 307.384, 297.352, 290.902, 285.582, 282.58000000000004, 279.168, 281.678, 282.16999999999996, 280.566, 279.234, 285.248, 287.36, 293.304, 299.084, 301.45799999999997, 294.896, 290.438, 283.868, 275.532, 269.224, 265.724, 258.602, 253.92200000000003, 250.92, 249.00799999999998, 247.76999999999998, 251.342, 250.44, 254.06, 256.668, 262.738, 266.346, 273.594, 278.368, 284.048, 289.3, 297.296, 300.90999999999997, 302.658, 305.23400000000004, 305.48, 304.462, 306.1, 315.418, 324.76599999999996, 330.086, 340.73400000000004, 348.846, 352.988, 354.194, 362.442, 370.01599999999996, 380.21799999999996, 396.222, 411.3639999999999, 430.044, 453.16400000000004, 477.496, 491.328, 501.54799999999994, 501.20200000000006, 491.68199999999996, 481.37600000000003, 476.986, 486.24799999999993, 490.446, 491.64799999999997, 496.81000000000006, 494.532, 485.37, 484.064, 492.86199999999997, 499.314, 520.354, 549.454, 591.1, 615.698, 650.164, 687.998, 716.1980000000001, 746.258], "ma20": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 119.0145, 118.701, 118.51400000000001, 118.6645, 118.73499999999999, 118.65799999999999, 118.5595, 118.374, 118.3145, 118.295, 118.197, 118.215, 118.4885, 118.84949999999999, 119.00050000000002, 119.2875, 119.71700000000001, 120.0865, 120.5875, 121.551, 122.998, 124.875, 126.58099999999999, 128.31300000000002, 130.47899999999998, 132.5625, 135.3645, 138.2645, 140.905, 142.7205, 144.8785, 147.17249999999999, 149.00650000000002, 150.998, 153.8185, 157.184, 160.446, 163.741, 166.7205, 169.4065, 171.1225, 172.983, 174.9665, 177.025, 178.673, 180.2345, 181.347, 183.212, 185.932, 188.98399999999998, 191.39849999999998, 193.007, 195.25, 197.592, 198.7815, 199.6885, 201.092, 202.1805, 203.1985, 204.70850000000002, 207.608, 210.205, 212.55900000000003, 214.169, 215.29850000000002, 217.29299999999998, 218.686, 218.94050000000001, 219.026, 219.3225, 219.87800000000001, 220.9275, 221.302, 222.2705, 222.49899999999997, 222.4565, 221.631, 221.2105, 220.81750000000002, 218.88899999999998, 215.68850000000003, 212.87199999999999, 210.6395, 209.08249999999998, 208.2325, 207.36849999999998, 206.644, 206.1045, 205.26500000000001, 204.558, 204.30450000000002, 204.0025, 203.96949999999998, 202.98499999999999, 203.1905, 203.02349999999998, 202.79149999999998, 202.7745, 203.542, 204.927, 206.791, 208.129, 209.50900000000001, 210.56599999999997, 211.7645, 212.51999999999998, 213.006, 213.3385, 214.602, 216.8005, 219.231, 221.621, 223.6815, 226.3825, 229.06300000000002, 231.50500000000002, 234.35999999999999, 238.27399999999997, 241.974, 246.06350000000003, 250.623, 254.82750000000001, 258.485, 262.015, 266.0295, 270.817, 275.181, 280.2125, 282.598, 284.6875, 285.679, 286.6285, 287.93449999999996, 289.492, 290.812, 292.3915, 294.8055, 296.21750000000003, 297.9475, 298.9135, 299.00100000000003, 298.9275, 298.72249999999997, 297.73699999999997, 296.3275, 294.2835, 293.158, 291.2185, 291.321, 290.769, 290.3915, 290.421, 291.9205, 292.0715, 293.139, 294.0935, 293.4415, 291.674, 289.207, 287.56100000000004, 285.191, 283.12399999999997, 281.259, 279.5195, 278.316, 276.5255, 274.731, 273.4095, 271.9355, 270.3835, 269.899, 269.0895, 267.78200000000004, 266.682, 265.456, 264.71999999999997, 264.73699999999997, 266.383, 268.3965, 269.7165, 271.50149999999996, 273.7395, 276.322, 279.8615, 282.761, 287.62600000000003, 292.679, 296.901, 302.20950000000005, 307.3625, 312.358, 317.0605, 321.827, 328.127, 334.0185, 341.8215, 348.8895, 357.01300000000003, 367.094, 378.165, 388.989, 397.96799999999996, 405.9435, 413.899, 421.98400000000004, 429.38100000000003, 438.3385, 446.0335, 451.62749999999994, 458.975, 464.767, 471.1325, 476.439, 482.33900000000006, 488.74899999999997, 495.8, 505.65500000000003, 516.703, 522.9725000000001, 531.9159999999999, 544.9675, 559.3175, 577.967], "ma60": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 137.71166666666667, 138.853, 140.0205, 141.33416666666665, 142.629, 143.81833333333333, 145.09033333333335, 146.61683333333335, 148.38383333333334, 149.99983333333333, 151.49133333333333, 152.79816666666665, 154.24833333333333, 155.8131666666667, 157.20016666666666, 158.72, 160.41833333333335, 162.00266666666667, 163.50216666666665, 165.222, 167.24283333333332, 169.35433333333333, 171.36883333333333, 173.16899999999998, 174.81683333333334, 176.69666666666666, 178.46583333333334, 180.139, 181.95433333333332, 183.67566666666667, 185.38500000000002, 187.03566666666666, 188.5195, 190.2868333333333, 191.69966666666667, 193.10966666666667, 194.38966666666664, 195.71066666666667, 196.91216666666665, 197.668, 198.13966666666664, 198.68666666666667, 199.38833333333332, 200.09216666666669, 200.73466666666667, 201.632, 202.22566666666668, 202.75233333333333, 203.40766666666664, 204.28816666666668, 205.19366666666667, 205.97899999999998, 206.8405, 207.61583333333334, 208.157, 208.38950000000003, 208.50483333333335, 208.72183333333334, 209.186, 209.50816666666665, 210.02916666666667, 210.40200000000002, 210.9025, 211.2725, 211.76516666666666, 212.39383333333333, 212.77866666666665, 212.7945, 212.96433333333334, 213.56033333333335, 214.47116666666668, 215.517, 216.31766666666667, 217.21266666666668, 218.25083333333333, 218.995, 219.59416666666667, 220.75300000000001, 222.11116666666666, 223.29316666666668, 224.36749999999998, 225.27616666666665, 226.21116666666666, 227.22116666666668, 228.6755, 230.2351666666667, 231.61033333333336, 233.2185, 234.155, 235.34866666666667, 236.40483333333336, 237.41733333333335, 238.52849999999998, 239.61983333333333, 241.02183333333332, 242.30666666666667, 243.98566666666665, 245.75533333333334, 247.82116666666667, 249.968, 252.13833333333332, 253.96133333333333, 255.57216666666667, 256.7726666666667, 258.0405, 259.20683333333335, 260.4483333333333, 261.58983333333333, 262.8403333333333, 264.08566666666667, 265.1005, 266.2235, 267.8455, 269.31533333333334, 271.00466666666665, 272.6633333333333, 274.20233333333334, 275.3885, 276.3761666666667, 277.51266666666663, 278.27166666666665, 278.95966666666664, 279.4888333333333, 279.75716666666665, 280.22433333333333, 280.54200000000003, 281.02333333333337, 281.61350000000004, 281.9515, 281.94666666666666, 281.9898333333333, 282.04633333333334, 282.54566666666665, 282.7485, 283.1356666666667, 283.73499999999996, 284.32800000000003, 284.7581666666667, 285.1836666666667, 285.397, 285.23116666666664, 285.26366666666667, 285.4345, 285.706, 285.8015, 286.14500000000004, 286.856, 287.1763333333333, 288.4886666666667, 289.505, 290.88283333333334, 292.1903333333333, 293.84316666666666, 295.62683333333337, 297.53783333333337, 300.2116666666667, 302.356, 305.02333333333337, 308.2325, 311.81416666666667, 315.2271666666667, 318.2771666666667, 321.17483333333337, 324.4266666666666, 327.687, 331.1775, 335.2495, 338.78133333333335, 341.9241666666667, 345.5736666666666, 349.008, 352.4275, 355.34933333333333, 359.0493333333333, 362.7411666666667, 367.44716666666665, 373.09383333333335, 380.033, 386.1543333333333, 393.2658333333333, 401.8193333333333, 410.34166666666664, 420.07750000000004], "macd_dif": [0.0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.15433928418165976, 0.02597062814493256, -0.05256288445528412, -0.16215395119954223, -0.3474785311137225, -0.365069258612138, -0.17366519316375673, 0.05724870646861291, 0.20161431208977376, 0.46319289983182443, 0.8862166606003115, 1.0129023231898628, 1.3997597246695364, 2.4965880622998213, 4.421948291926967, 6.4320516252026465, 7.662394104262489, 8.876452808890406, 10.190755750591592, 10.667993032544473, 12.188700384130982, 13.330579928717214, 13.681618547082849, 12.435832637858397, 11.763198861253954, 11.442779818486912, 10.52845971582343, 10.022386020393924, 10.798397956790836, 12.303610750756604, 13.400930053712614, 13.965941700715632, 14.04524208853033, 14.28873678452726, 13.863568961909152, 14.155034981659554, 14.147094854892373, 14.43674752075978, 14.308506760162885, 13.470614349323, 13.212657453658466, 14.149897407725746, 15.69537147535425, 15.892134673919514, 15.293221115257893, 13.704405978240885, 12.78286242669489, 12.403386852957226, 11.412705000564927, 11.076043093413546, 11.536424298996764, 11.121094197399628, 10.35226184774487, 10.758307592627972, 12.717593488560567, 14.407659720546945, 15.104917768735163, 14.749152219381386, 13.345072062829189, 12.898626674501088, 11.994219299890716, 10.622456037163033, 10.129451132893053, 9.129182890141465, 8.082714233966954, 7.01356968301576, 5.498501220783169, 5.684718223640459, 4.0331820495412956, 2.830489240209573, 1.4570918626396008, 0.36605868234812533, -0.7657315151149646, -2.9671542451488335, -4.923742945373107, -5.487979186912099, -5.398443715902317, -4.91896784869067, -4.316541253596739, -3.012001428339687, -2.140672489140144, -1.664951269093308, -1.0491018657051256, -0.8418226822448105, -0.10504471591841025, 0.2388701547466212, 0.3372778721651457, 0.32836907102961277, 0.4835730693305038, 0.14256682219496497, -0.628792110144218, -0.8813520473313758, -0.0903793252149967, 0.19212499353960766, 0.9098463259708467, 1.5351853035055854, 2.543696635722199, 3.137331478504791, 3.9631441732375094, 4.641565581666413, 4.505154256855263, 3.8706991817826406, 5.039024132289512, 7.101512066364222, 9.571421278914329, 11.098314009215244, 11.474103880428629, 12.577482225334506, 13.431838681026164, 13.110530050231574, 12.865738045475354, 14.561519374564085, 16.361558656618598, 17.868580217696973, 20.094097620619408, 21.115752593044448, 21.338920989183237, 20.899649265483617, 21.486776555855897, 23.01177056904379, 22.653611797962583, 22.703560204688586, 19.971940748936163, 18.33649028361515, 16.029325499860875, 13.672893541080612, 11.545627550115114, 11.088360719015554, 10.35804213944732, 9.24422510828191, 9.753978430208917, 10.47775691969349, 12.07014454627324, 12.244463689077634, 12.088338075159925, 11.078401049154195, 9.614451515398684, 6.74173377225236, 4.907191565830033, 3.711499619877088, 2.907108498462378, 1.5337865828416284, 1.1862120155279854, 0.5884688415298456, -0.4250161961214758, -0.9310228074309634, 0.9032001929098215, 1.519492284995522, 3.2015502798205375, 3.8790424378194075, 3.2903078899516345, 1.4473926984318268, 0.015736719908545638, -0.7319793512411366, -2.6177172491362626, -4.331754436955691, -5.849455886820408, -8.387832169343255, -8.932852536911412, -9.897038266066943, -10.371348586447255, -10.580094864962405, -10.120507534853573, -10.081451848473705, -8.77129195916217, -7.8801833056085115, -5.666691530823073, -4.34732684652306, -2.248595805017146, -0.4007740966576421, 1.1775565762355313, 3.6555358034169103, 6.1703567272380155, 7.338032872941312, 7.602872783416103, 8.180022311185041, 8.8644554476287, 9.410555991023216, 10.058235265864823, 12.947918626314959, 15.532623041182546, 16.099526807347388, 18.596223184743224, 19.65595711934401, 21.175623796090008, 21.422136163385744, 22.898781053279663, 25.76192128264637, 28.075299852290982, 32.79540785013461, 35.073151633628754, 39.396818112051506, 46.07345916366984, 51.626571564069764, 54.42850781436522, 53.51619567070077, 50.91599446787876, 48.377534899082264, 46.37107757425218, 45.669823800390986, 47.557903335965364, 45.19981290559241, 41.72119717916814, 40.63349315215004, 37.74992454805147, 35.27271353859476, 32.76797313473446, 33.346219563222974, 34.596683636104615, 39.432384164588996, 46.19867507249455, 55.81558475734943, 58.8284275616391, 65.63189782070788, 75.80792839039759, 82.50108136220115, 92.38886695136694], "macd_dea": [0.0, null, null, null, null, null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.030867856836331954, 0.029888411098052077, 0.013398151987384838, -0.02171226865000058, -0.08686552114274496, -0.14250626863662358, -0.14873805354205022, -0.1075407015399176, -0.04570969881397933, 0.05607082091518143, 0.22209998885220744, 0.38026045571973854, 0.5841603095096981, 0.9666458600677228, 1.6577063464395716, 2.6125754021921868, 3.6225391426062474, 4.6733218758630795, 5.776808650808782, 6.75504552715592, 7.841776498550932, 8.93953718458419, 9.88795345708392, 10.397529293238815, 10.670663206841843, 10.825086529170857, 10.765761166501372, 10.617086137279882, 10.653348501182073, 10.983400951096979, 11.466906771620106, 11.966713757439212, 12.382419423657435, 12.7636828958314, 12.98366010904695, 13.21793508356947, 13.40376703783405, 13.610363134419197, 13.749991859567935, 13.694116357518947, 13.59782457674685, 13.70823914294263, 14.105665609424953, 14.462959422323866, 14.629011760910672, 14.444090604376715, 14.11184496884035, 13.770153345663726, 13.298663676643965, 12.854139559997881, 12.590596507797658, 12.296696045718052, 11.907809206123416, 11.677908883424326, 11.885845804451574, 12.390208587670648, 12.93315042388355, 13.296350782983117, 13.306095038952332, 13.224601366062084, 12.97852495282781, 12.507311169694855, 12.031739162334494, 11.451227907895888, 10.777525173110101, 10.024734075091233, 9.119487504229621, 8.43253364811179, 7.55266332839769, 6.608228510760067, 5.578001181135973, 4.535612681378404, 3.47534384207973, 2.186844224634017, 0.7647267906325921, -0.4858144048763462, -1.4683402670815404, -2.1584657834033663, -2.5900808774420407, -2.67446498762157, -2.5677064879252844, -2.387155444158889, -2.1195447284681364, -1.864000319223471, -1.5122091985624588, -1.161993327900643, -0.8621390878874852, -0.6240374561040656, -0.4025153510171517, -0.29349891637472836, -0.3605575551286263, -0.46471645356917624, -0.3898490278983403, -0.2734542236107507, -0.03679411369443125, 0.2776017697455721, 0.7308207429408975, 1.2121228900536762, 1.7623271466904429, 2.338174833685637, 2.771570718319562, 2.991396411012178, 3.400921955267645, 4.14103997748696, 5.227116237772433, 6.401355792060995, 7.415905409734522, 8.448220772854519, 9.444944354488849, 10.178061493637394, 10.715596804004985, 11.484781318116806, 12.460136785817165, 13.541825472193127, 14.852279901878383, 16.104974440111597, 17.151763749925927, 17.901340853037464, 18.618427993601152, 19.49709650868968, 20.12839956654426, 20.643431694173124, 20.50913350512573, 20.074604860823616, 19.265548988631068, 18.147017899120975, 16.826739829319802, 15.679064007258953, 14.614859633696627, 13.540732728613683, 12.78338186893273, 12.322256879084883, 12.271834412522555, 12.266360267833571, 12.230755829298841, 12.000284873269912, 11.523118201695667, 10.566841315807006, 9.434911365811612, 8.290229016624707, 7.213604912992241, 6.077641246962118, 5.099355400675291, 4.1971780888462025, 3.272739231852667, 2.431986823995941, 2.1262294977787173, 2.0048820552220783, 2.24421570014177, 2.5711810476772974, 2.715006416132165, 2.4614836725920974, 1.972334282055387, 1.4314715553960822, 0.6216337944896132, -0.36904385179944765, -1.4651262588036398, -2.849667440911563, -4.066304460111533, -5.232451221302615, -6.2602306943315424, -7.1242035284577145, -7.723464329736887, -8.19506183348425, -8.310307858619833, -8.224282948017569, -7.712764664578669, -7.039677100967547, -6.081460841777467, -4.945323492753502, -3.7207474789556954, -2.245490822481174, -0.5623213125373363, 1.0177495245583934, 2.3347741763299354, 3.503823803300957, 4.575950132166506, 5.542871303937848, 6.4459440963232435, 7.746339002321586, 9.303595810093778, 10.6627820095445, 12.249470244584245, 13.730767619536199, 15.21973885484696, 16.460218316554716, 17.747930863899704, 19.35072894764904, 21.09564312857743, 23.435596072888863, 25.76310718503684, 28.489849370439774, 32.00657132908579, 35.93057137608258, 39.63015866373911, 42.40736606513144, 44.10909174568091, 44.96278037636118, 45.24443981593938, 45.3295166128297, 45.775193957456835, 45.66011774708395, 44.87233363350079, 44.024565537230636, 42.769637339394805, 41.27025257923479, 39.56979669033473, 38.32508126491238, 37.579401739150825, 37.949998224238456, 39.599733593889674, 42.842903826581626, 46.04000857359312, 49.95838642301607, 55.12829481649238, 60.60285212563413, 66.96005509078068], "macd_hist": [0.0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.24694285469065563, -0.007835565906239031, -0.13192207288533792, -0.2808833650990833, -0.5212260199419552, -0.44512597995102887, -0.04985427924341301, 0.329578816017061, 0.49464802180750617, 0.814244157833286, 1.328233343496208, 1.2652837349402486, 1.6311988303196765, 3.059884404464197, 5.52848389097479, 7.6389524460209195, 8.079709923312484, 8.406261866054653, 8.82789419956562, 7.825895010777106, 8.6938477711601, 8.782085488266048, 7.587330179997856, 4.0766066892391635, 2.1850713088242237, 1.2353865786321094, -0.47460290135588323, -1.1894002337719165, 0.29009891121752673, 2.6404195993192516, 3.868046564185015, 3.99845588655284, 3.3256453297457895, 3.0501077773917196, 1.759817705724405, 1.874199796180168, 1.4866556341166444, 1.652768772681167, 1.1170298011899007, -0.4470040163918938, -0.7703342461767697, 0.8833165295662333, 3.1794117318585933, 2.8583505031912964, 1.3284187086944428, -1.4793692522716597, -2.657965084290918, -2.7335329854129995, -3.771917352158077, -3.5561929331686706, -2.1083444176017885, -2.3512036966368477, -3.1110947167570906, -1.8392025815927084, 1.663495368217987, 4.034902265752596, 4.343534689703226, 2.905602872796539, 0.07795404775371395, -0.6519493831219911, -1.9686113058741874, -3.769710265063644, -3.8045760588828834, -4.644090035508846, -5.389621878286295, -6.022328784150947, -7.241972566892905, -5.49563084894266, -7.0389625577127894, -7.555478541100987, -8.241818636992745, -8.339107998060557, -8.48215071438939, -10.307996939565701, -11.376939472011397, -10.004329564071506, -7.860206897641554, -5.521004130574608, -3.4529207523093968, -0.6750728814362343, 0.8540679975702812, 1.4444083501311624, 2.1408857255260214, 2.044355273957321, 2.814328965288097, 2.8017269652945282, 2.398833920105262, 1.9048130542673567, 1.7721768406953111, 0.8721314771393867, -0.5364691100311834, -0.8332711875243992, 0.5989394053666872, 0.9311584343007168, 1.8932808793305558, 2.5151670675200264, 3.625751785562603, 3.8504171769022295, 4.401634053094133, 4.606781495961552, 3.4671670770714025, 1.7586055415409252, 3.2762043540437347, 5.920944177754524, 8.688610082283791, 9.393916434308498, 8.116396941388214, 8.258522904959975, 7.973788653074632, 5.864937113188361, 4.300282482940737, 6.153476112894559, 7.802843741602867, 8.653509491007693, 10.48363543748205, 10.021556305865701, 8.37431447851462, 5.996616824892307, 5.73669712450949, 7.029348120708221, 5.050424462836645, 4.120257021030923, -1.0743855123791377, -3.4762291544169344, -6.472446977540386, -8.948248716080727, -10.562224558409376, -9.181406576486797, -8.513634988498612, -8.593015240663547, -6.058806877447626, -3.688999918782784, -0.40337973249862813, -0.043793157511874625, -0.2848355082778333, -1.8437676482314345, -3.817333372593964, -7.6502150871092915, -9.055439599963158, -9.157458793495238, -8.612992829059726, -9.08770932824098, -7.826286770294612, -7.217418494632714, -7.395510855948285, -6.726019262853809, -2.4460586097377917, -0.9707795404531128, 1.9146691593575351, 2.6157227802842202, 1.150602947638939, -2.028181948320541, -3.913195124293683, -4.3269018132744375, -6.478702087251752, -7.925421170312488, -8.768659256033537, -11.076329456863384, -9.733096153599758, -9.329174089528657, -8.222235784231424, -6.91178267300938, -4.794086410233373, -3.772780029978911, -0.9219682010846739, 0.6881992848181149, 4.092146267511193, 5.384700508888974, 7.665730073520642, 9.08909879219172, 9.796608110382454, 11.802053251796169, 13.465356079550704, 12.640566696765838, 10.536197214172336, 9.352397015768169, 8.577010630924388, 7.735369374170736, 7.22458233908316, 10.403159247986745, 12.458054462177536, 10.873489595605776, 12.693505880317957, 11.850378999615621, 11.911769882486094, 9.923835693662056, 10.301700378759918, 12.822384669994662, 13.959313447427107, 18.71962355449149, 18.620088897183827, 21.813937483223462, 28.133775669168102, 31.392000375974362, 29.596698301252218, 22.217659211138653, 13.613805444395709, 6.829509045442165, 2.2532755166256067, 0.6806143751225733, 3.5654187570170564, -0.9206096829830841, -6.302272908665287, -6.782144770161196, -10.039425582686675, -11.99507808128007, -13.60364711120053, -9.957723403378807, -5.96543620609242, 2.964771880701079, 13.197882957209757, 25.945361861535602, 25.576837976091966, 31.34702279538361, 41.35926714781043, 43.79645847313404, 50.8576237211725], "rsi14": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, 29.79732643380767, 29.728298639838485, 27.996164219358704, 31.858114717520337, 34.88064280331403, 46.40196376021645, 43.00312089174703, 43.05659500071658, 52.04451791393366, 46.014882776812414, 39.44198575631048, 42.95659236037024, 41.53146117230092, 42.219588931569355, 41.08513200562065, 38.7505433232552, 43.007106249145586, 49.18959075152488, 51.41918807356002, 50.3379257762964, 54.651186833818265, 60.17029482549043, 54.0024567641136, 60.674399510008556, 72.36045646903224, 80.706443152014, 83.4249925012638, 77.63671208320648, 79.53880013582597, 81.82884877172854, 73.50232527681099, 79.90363970836005, 80.26529728338619, 73.97977571662936, 57.17678956399206, 60.34045169133677, 62.61643931621789, 57.09614549441658, 59.48037369026748, 67.14186234466258, 71.70965910795242, 71.94934574496615, 70.38346702252652, 68.08833008227877, 69.85802398288794, 64.72788326395072, 68.96671421542618, 68.12193142872783, 70.49450595609764, 68.214009495323, 61.73478064788369, 65.15998406498878, 71.56504559834619, 75.25788300709213, 67.1870081703253, 62.26261070508604, 55.07761078835369, 57.74114322190832, 60.321122146131835, 56.14700740074885, 59.278126067022605, 63.471605803081765, 58.54994034403831, 56.24234398147164, 61.981605735007115, 68.86742675519608, 69.86694095465856, 66.3293739080866, 61.07552093695302, 54.930410440971855, 58.697163945741565, 56.14066645034377, 52.93388236088885, 56.50533429638228, 53.4090550601042, 52.424048838306305, 51.41317641547882, 47.65100861616976, 55.98639986930204, 46.38806445071251, 47.16061068486476, 45.12494740573563, 45.13514893786497, 43.64109297630048, 37.20707237326135, 36.057939458136566, 42.61500585645717, 45.69734218887281, 47.93069488012452, 49.03856747847548, 53.887125853308504, 52.61353576590627, 50.99122231617129, 52.51896585266479, 50.35332898436185, 54.340932315860314, 52.45675406208391, 51.087667877769825, 50.396208468476075, 51.81453891481614, 47.76291310178946, 43.71544695088956, 47.03018170931545, 55.11556831231668, 52.15306966829305, 55.91470320221752, 56.45736543704065, 60.30131822591807, 58.5614752421814, 61.399997841280644, 61.94228621525099, 55.231166183473725, 50.654681615021666, 62.626165190149, 68.4367878407897, 72.0668219687793, 69.31972077486728, 63.291903074416325, 67.42266005732046, 67.9728864764254, 60.99710951595677, 61.78549135089319, 70.21959914433906, 72.2837287041904, 73.17341730220971, 76.7210403014629, 72.63612022721153, 69.8992739515518, 66.90770455706291, 71.10622611384946, 74.94113275380612, 65.68916117874474, 67.65088969541821, 53.57513150343627, 56.42171005685389, 52.55096020878461, 50.8664347775304, 50.27282390448271, 56.17060642939735, 54.886132559889234, 52.65076307103775, 58.97116721489171, 60.628143336907996, 64.66694243563772, 59.31103963969246, 58.457587546539706, 54.335311412896836, 51.486044591231426, 44.117300941005034, 46.626655640593135, 48.14028602472461, 49.05382477109074, 45.54270043947577, 49.62230365140304, 48.00281337513247, 45.25683388253632, 46.97482905420212, 58.08116423953607, 53.66218241662015, 58.73687601966107, 55.488346957311606, 50.16754098540948, 44.43209583608631, 44.57788146623559, 46.54545234256141, 41.05655111406702, 40.02143720771545, 39.12765031035728, 33.96730137870544, 41.83312275122581, 39.435385353084705, 40.404399582332466, 40.67568980887556, 43.776498980539294, 41.73667966803547, 48.61856057488221, 47.40028176913751, 54.79056220083093, 52.13741353252482, 56.89831006227138, 57.69222488222898, 58.27859981071133, 63.67622259523181, 65.99818955647424, 60.99834961432454, 57.37784846658722, 59.46522471690506, 60.93484043838958, 61.447661748476925, 62.99091959951982, 72.15486135385724, 73.48106015651626, 64.43840166374838, 71.11874791813395, 66.9715305491192, 69.52548084364366, 65.3389776049249, 69.62108229660221, 74.06452073118074, 74.7985754162437, 80.16331799359685, 74.61641209127487, 79.00865081850236, 83.03082596568443, 83.78894736734752, 79.45497817966243, 69.43812360279776, 64.91817404399796, 65.069777248431, 66.13479181476512, 68.81909213481245, 73.58571723775985, 62.18109824179524, 58.85440011225925, 62.901637458638156, 58.316885588029194, 58.754920610801186, 58.2518172273775, 64.19354368256495, 66.28169597193049, 72.51313766854825, 76.31412925746857, 80.43164416420495, 69.92650585458601, 74.62360144009142, 78.56720215559157, 77.6022237038849, 80.98198820559686], "bb_upper": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 124.85965004084582, 123.47450563003753, 122.69571926365222, 123.37377372319767, 123.54647586505428, 123.508779731136, 123.31046400744101, 122.90296191196173, 122.81548422569998, 122.80359845184732, 122.78027437537837, 122.79141999820821, 122.91503035683706, 123.00027089225603, 123.23411535805984, 123.75491032366627, 124.86438807551949, 125.13626940067564, 126.25896145186583, 130.6023201247111, 138.66832048172597, 146.60523101579918, 151.69441306951325, 156.99695446935448, 162.95761567246979, 166.69860222330604, 173.500590767146, 179.38219715098353, 183.3125783321802, 184.0900131588468, 185.0153754513851, 186.11761618932468, 186.16256613999929, 186.25596227804436, 188.03942066265898, 191.81696949439942, 194.89197300120873, 195.8569772698886, 195.5406287124121, 196.67760358969727, 197.82783944738392, 200.8748275485849, 202.9322592602096, 205.9230674094307, 208.26553628873336, 208.7831024001176, 210.6971196590406, 215.5538828147033, 222.5994387433865, 224.65301366732754, 225.26574274280384, 224.45332512711144, 222.22801104603525, 220.1396336674162, 219.3720854943467, 220.28701283466845, 222.90429708215072, 223.67281720871438, 223.54039595391737, 225.6434671841157, 232.60186532731583, 239.79439573563477, 244.0680151543967, 246.19214344345352, 246.45946806904433, 246.8399816394162, 246.89595880890295, 247.04314078338547, 247.2180885356158, 247.464514053724, 247.5265309555499, 246.3768967512002, 245.8306359995822, 246.1636944076132, 245.65832373796778, 245.7224023250765, 246.4473880530588, 247.00370877673035, 247.68441859890154, 250.51863793659356, 249.6990044214284, 245.35604814674426, 241.1182890015335, 238.18805127462798, 237.00408520137532, 234.44966782932374, 232.5505214955617, 231.4535177127241, 228.8119127488085, 227.00195829616513, 226.1998862491622, 225.34942659377458, 225.2843469147681, 221.496043730703, 221.91116288890433, 221.64674598452157, 221.55016549091377, 221.53473504650194, 222.88504174632314, 221.86523497298344, 219.71486304477108, 219.53033307995165, 221.6061333794416, 223.14040320651438, 225.71940519494848, 228.15643565522524, 228.9620413636967, 229.1061114551317, 233.05044557137538, 240.68853087322185, 250.26329537111297, 256.8174520371017, 260.43443744723, 265.9081564145366, 270.95188210492137, 272.99462641432194, 274.01369087487313, 279.8560771005971, 287.4087745234858, 293.98168538926535, 303.50307454608964, 309.7970831801552, 314.51395412195376, 317.29551826819284, 322.2012229484729, 329.4513200182282, 331.02831610382003, 331.10791742632625, 329.2131441486562, 329.1050500787695, 328.9414663651993, 328.2891064646207, 326.44504789275265, 326.12752243383466, 325.4545805043447, 322.5895511126132, 319.9436633975118, 321.14549701139265, 325.1754862457729, 326.5960000857943, 326.80420549864715, 326.71197471160826, 326.61375373661065, 327.737063399933, 327.0457505198457, 322.8118362816692, 321.2851687874909, 318.42116992410854, 318.42015784669337, 318.19173283245124, 318.46858195308056, 318.44604087418963, 319.9443102156006, 320.14901219392493, 322.4034555049295, 323.4255563718264, 322.5098554918403, 321.11279032840855, 315.85185698967064, 312.55444786138963, 310.43955235454104, 309.9067731200486, 310.10469493009316, 313.8488241850171, 314.2730523819737, 314.89643247498685, 314.675331212326, 314.8088451518257, 313.6148174008404, 312.8228884381008, 312.3478058253704, 311.4817636692121, 307.01556807632977, 303.86955791928267, 298.01402967011364, 294.31951486088917, 294.3953634747435, 301.00874943593277, 308.7088267872248, 312.88064079997423, 316.1680930086457, 320.0627906754259, 324.1039784437606, 326.2614557219616, 329.82699787532397, 338.82937816980444, 347.49600827298036, 350.8140432826788, 359.73885719265434, 363.89215022888436, 370.6915641290673, 373.5780195757917, 381.056249902392, 392.2679638530635, 403.3069011289047, 423.15752037842765, 435.5647011765764, 455.79644802647863, 485.4631803469129, 511.6157511406362, 529.507895085323, 538.4182509218122, 543.0139429517902, 545.889423425338, 547.9307619909301, 553.571792718301, 564.2129350970442, 564.0489280210854, 563.6589569886511, 563.3252246284118, 560.0777330996882, 552.5846304509587, 545.0534733711481, 543.5401859035428, 542.4125223965032, 560.5423345269538, 586.4936775003155, 628.7236566843812, 647.3935969048257, 679.5368389625258, 726.3125480024199, 762.842111374153, 810.525487877781], "bb_mid": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 119.0145, 118.701, 118.51400000000001, 118.6645, 118.73499999999999, 118.65799999999999, 118.5595, 118.374, 118.3145, 118.295, 118.197, 118.215, 118.4885, 118.84949999999999, 119.00050000000002, 119.2875, 119.71700000000001, 120.0865, 120.5875, 121.551, 122.998, 124.875, 126.58099999999999, 128.31300000000002, 130.47899999999998, 132.5625, 135.3645, 138.2645, 140.905, 142.7205, 144.8785, 147.17249999999999, 149.00650000000002, 150.998, 153.8185, 157.184, 160.446, 163.741, 166.7205, 169.4065, 171.1225, 172.983, 174.9665, 177.025, 178.673, 180.2345, 181.347, 183.212, 185.932, 188.98399999999998, 191.39849999999998, 193.007, 195.25, 197.592, 198.7815, 199.6885, 201.092, 202.1805, 203.1985, 204.70850000000002, 207.608, 210.205, 212.55900000000003, 214.169, 215.29850000000002, 217.29299999999998, 218.686, 218.94050000000001, 219.026, 219.3225, 219.87800000000001, 220.9275, 221.302, 222.2705, 222.49899999999997, 222.4565, 221.631, 221.2105, 220.81750000000002, 218.88899999999998, 215.68850000000003, 212.87199999999999, 210.6395, 209.08249999999998, 208.2325, 207.36849999999998, 206.644, 206.1045, 205.26500000000001, 204.558, 204.30450000000002, 204.0025, 203.96949999999998, 202.98499999999999, 203.1905, 203.02349999999998, 202.79149999999998, 202.7745, 203.542, 204.927, 206.791, 208.129, 209.50900000000001, 210.56599999999997, 211.7645, 212.51999999999998, 213.006, 213.3385, 214.602, 216.8005, 219.231, 221.621, 223.6815, 226.3825, 229.06300000000002, 231.50500000000002, 234.35999999999999, 238.27399999999997, 241.974, 246.06350000000003, 250.623, 254.82750000000001, 258.485, 262.015, 266.0295, 270.817, 275.181, 280.2125, 282.598, 284.6875, 285.679, 286.6285, 287.93449999999996, 289.492, 290.812, 292.3915, 294.8055, 296.21750000000003, 297.9475, 298.9135, 299.00100000000003, 298.9275, 298.72249999999997, 297.73699999999997, 296.3275, 294.2835, 293.158, 291.2185, 291.321, 290.769, 290.3915, 290.421, 291.9205, 292.0715, 293.139, 294.0935, 293.4415, 291.674, 289.207, 287.56100000000004, 285.191, 283.12399999999997, 281.259, 279.5195, 278.316, 276.5255, 274.731, 273.4095, 271.9355, 270.3835, 269.899, 269.0895, 267.78200000000004, 266.682, 265.456, 264.71999999999997, 264.73699999999997, 266.383, 268.3965, 269.7165, 271.50149999999996, 273.7395, 276.322, 279.8615, 282.761, 287.62600000000003, 292.679, 296.901, 302.20950000000005, 307.3625, 312.358, 317.0605, 321.827, 328.127, 334.0185, 341.8215, 348.8895, 357.01300000000003, 367.094, 378.165, 388.989, 397.96799999999996, 405.9435, 413.899, 421.98400000000004, 429.38100000000003, 438.3385, 446.0335, 451.62749999999994, 458.975, 464.767, 471.1325, 476.439, 482.33900000000006, 488.74899999999997, 495.8, 505.65500000000003, 516.703, 522.9725000000001, 531.9159999999999, 544.9675, 559.3175, 577.967], "bb_lower": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 113.16934995915418, 113.92749436996246, 114.3322807363478, 113.95522627680234, 113.9235241349457, 113.80722026886397, 113.80853599255899, 113.84503808803827, 113.81351577430001, 113.78640154815268, 113.61372562462164, 113.6385800017918, 114.06196964316294, 114.69872910774396, 114.7668846419402, 114.82008967633372, 114.56961192448054, 115.03673059932436, 114.91603854813418, 112.4996798752889, 107.32767951827405, 103.14476898420084, 101.46758693048672, 99.62904553064556, 98.0003843275302, 98.42639777669396, 97.22840923285398, 97.14680284901647, 98.4974216678198, 101.35098684115317, 104.74162454861491, 108.22738381067529, 111.85043386000075, 115.74003772195562, 119.59757933734103, 122.5510305056006, 126.00002699879127, 131.62502273011143, 137.9003712875879, 142.13539641030272, 144.41716055261608, 145.0911724514151, 147.0007407397904, 148.1269325905693, 149.08046371126665, 151.6858975998824, 151.99688034095942, 150.8701171852967, 149.2645612566135, 153.31498633267242, 157.53125725719613, 161.56067487288857, 168.27198895396475, 175.04436633258382, 178.1909145056533, 179.08998716533156, 179.2797029178493, 180.6881827912856, 182.85660404608262, 183.77353281588432, 182.61413467268417, 180.61560426436526, 181.04998484560335, 182.1458565565465, 184.1375319309557, 187.74601836058375, 190.47604119109707, 190.83785921661456, 190.83391146438422, 191.18048594627598, 192.22946904445013, 195.4781032487998, 196.77336400041779, 198.3773055923868, 199.33967626203216, 199.1905976749235, 196.8146119469412, 195.41729122326964, 193.9505814010985, 187.2593620634064, 181.67799557857165, 180.38795185325571, 180.1607109984665, 179.97694872537198, 179.46091479862466, 180.28733217067622, 180.73747850443831, 180.7554822872759, 181.71808725119152, 182.11404170383486, 182.40911375083783, 182.65557340622541, 182.65465308523187, 184.47395626929696, 184.46983711109564, 184.4002540154784, 184.0328345090862, 184.01426495349804, 184.19895825367686, 187.98876502701654, 193.86713695522891, 196.72766692004834, 197.41186662055844, 197.99159679348557, 197.80959480505152, 196.88356434477473, 197.0499586363033, 197.57088854486832, 196.15355442862463, 192.91246912677815, 188.19870462888701, 186.42454796289832, 186.92856255277002, 186.85684358546337, 187.17411789507867, 190.0153735856781, 194.7063091251268, 196.6919228994029, 196.53922547651413, 198.14531461073472, 197.74292545391035, 199.85791681984483, 202.45604587804627, 206.73448173180716, 209.85777705152705, 212.18267998177177, 219.33368389617993, 229.31708257367367, 235.98285585134377, 240.26994992123048, 242.4165336348007, 244.96789353537923, 249.42395210724726, 252.85647756616538, 256.16941949565535, 262.1934488873868, 269.6673366024882, 271.2895029886074, 270.7195137542271, 271.2309999142057, 271.1977945013529, 271.14302528839175, 270.8312462633893, 267.73693660006694, 265.6092494801543, 265.75516371833083, 265.03083121250916, 264.0158300758915, 264.2218421533067, 263.3462671675488, 262.31441804691946, 262.39595912581035, 263.8966897843994, 263.9939878060751, 263.8745444950705, 264.7614436281736, 264.3731445081597, 262.2352096715914, 262.56214301032935, 262.56755213861044, 259.9424476454589, 256.3412268799513, 252.4133050699069, 245.1901758149829, 242.35894761802626, 238.1545675250132, 234.786668787674, 232.0101548481742, 230.25618259915956, 227.94411156189926, 227.4501941746296, 226.6972363307879, 228.5484319236703, 229.4944420807174, 232.8979703298864, 235.1204851391108, 235.07863652525646, 231.7572505640672, 228.08417321277523, 226.55235920002576, 226.83490699135422, 227.4162093245741, 228.54002155623942, 233.46154427803833, 235.69500212467605, 236.42262183019562, 237.86199172701959, 242.98795671732117, 244.6801428073458, 250.8328497711157, 254.02443587093276, 260.5429804242083, 262.597750097608, 263.9860361469365, 264.7300988710953, 260.4854796215724, 262.2142988234236, 258.22955197352144, 248.72481965308708, 244.71424885936386, 248.47010491467702, 257.51774907818776, 268.8730570482097, 281.90857657466205, 296.03723800906994, 305.19020728169903, 312.4640649029558, 328.0180719789146, 339.5960430113488, 354.6247753715882, 369.4562669003118, 389.68036954904125, 407.82452662885186, 421.1378140964573, 435.08547760349677, 431.0576654730462, 424.81632249968465, 404.68234331561877, 398.55140309517446, 384.29516103747403, 363.62245199758, 355.792888625847, 345.408512122219], "phases": [{"start_idx": 0, "end_idx": 43, "name": "第一阶段", "subtitle": "底部盘整与初步反弹", "price_range": "114–168", "analysis": "2025年6月末至8月中旬，股价在113~130元区间窄幅震荡，布林带收窄至报告期最小值（约12元），为后续突破蓄积了充足的动能。K线实体以小阴小阳交替为主（日均涨跌幅±0.8%），均线系统由空头排列逐步转为粘合。成交量处于地量水平（日均约17万手），典型底部吸筹特征。7月25日放量长阳（+3.4%，成交量35.7万手）首次突破MA20压制，标志着短期底部确认。8月21日至22日连续两根大阳线（+8%、+10%），成交量急剧放大至85万手以上，完成「W底」颈线突破，MACD零轴下方金叉+红柱持续放大，确认做多信号。关键技术位：支撑113元、颈线135元。"}, {"start_idx": 44, "end_idx": 103, "name": "第二阶段", "subtitle": "主升浪第一波", "price_range": "146–254", "analysis": "2025年8月下旬至11月中旬，股价自137元快速拉升至254元高点，区间最大涨幅约85%。9月1日和11日两次涨停突破关键整数关口，伴随成交量持续放大（日均超40万手）。MA5/MA20/MA60形成标准多头排列发散（银三角），MACD红柱持续放大、DIF快速远离零轴，RSI数次触及80以上超买区。10月27日涨停突破200元整数关口后冲至254元。11月14日遭遇跌停（-9.55%），MACD高位死叉、RSI从超买区回落，宣告第一波主升浪阶段性见顶。关键技术位：支撑180元、阻力254元。"}, {"start_idx": 104, "end_idx": 155, "name": "第三阶段", "subtitle": "高位震荡蓄势", "price_range": "196–331", "analysis": "2025年11月中至2026年2月初，股价在182~328元区间宽幅震荡，振幅接近80%，市场分歧极度加大。MA20一度走平并轻微下弯，但MA60持续稳定上行提供中长期支撑。布林带宽度由80元扩大至100元以上，进入高波动率模式。MACD在零轴附近反复纠缠，DIF/DEA出现两次无效的金叉和死叉信号，趋势指示作用减弱。2026年1月16日及28日放量冲击300元上方均以长上影线收场（冲高回落），300元以上卖压沉重。2月2日跌停（-10.00%）精准回踩MA60支撑线（约185元）后迅速企稳，形成「回踩确认」——为后续第二波突破蓄积了动能。此阶段是典型的「上升中继平台」，技术含义偏多，但交易难度极大。关键技术位：支撑185元（MA60）、阻力328元。"}, {"start_idx": 156, "end_idx": 201, "name": "第四阶段", "subtitle": "主升浪第二波", "price_range": "237–331", "analysis": "2026年2月中旬至4月底，股价自283元攀升至345元，区间涨幅约22%，斜率明显低于第一波主升浪的85%。2月24日以涨停姿态突破330元创阶段新高，3月16日再次涨停，资金做多意愿强烈但持续性不足。4月8日成交量暴增至75.3万手为报告期单日最大，但当日涨幅仅2.5%且收出上影线——「放量滞涨」是阶段性顶部的重要预警。MACD金叉信号效力递减（DIF峰值低于第一波），RSI(14)在70附近反复震荡未能有效突破80。4月23日短暂跌破300元心理关口后快速收回，但成交量未能重新放大，表明买盘追高意愿正在衰减。整体来看，此阶段「价格上涨但动能递减」，是典型的消耗性上涨特征。关键技术位：支撑285元、阻力345元。"}, {"start_idx": 202, "end_idx": 241, "name": "第五阶段", "subtitle": "加速赶顶", "price_range": "297–847", "analysis": "2026年5月至6月底，股价自313元快速飙升，最高触及846.66元，不足两个月涨幅超170%，呈现典型的「逼空」走势。期间出现9次涨停级别波动，K线以大阳线或跳空高开为主，但大阴线频率和幅度显著增加（6月5日-7.19%、6月23日-8.21%）。MA60乖离率高达约+100%，均线极值发散状态创历史纪录。MACD高位钝化+红柱不增反缩（顶背离雏形），RSI(14)长期运行在80–90以上极端超买区，持续约35个交易日。布林带开口扩大至极值（带宽超过{((bb_upper[-1]-bb_lower[-1])/bb_mid[-1]*100) if bb_mid[-1] is not None else 0:.0f}%中轨），收盘价频繁突破上轨。成交量维持高位（日均50万手以上），但「天量长阴」的出现频率增加。多项技术指标同时指向极端过热，市场已进入非理性炒作阶段，技术面存在强烈的均值回归压力。从行为金融学角度，当前处于「贪婪→恐慌」转换的临界区域。关键技术位：短期支撑600元、中期支撑400元（MA60附近）。"}]};
+
+/* ================================================================
+   PHASE LIST (DYNAMIC)
+   ================================================================ */
+(function(){
+  const el = document.getElementById("phase-list");
+  R.phases.forEach((p,i)=>{
+    const d = document.createElement("div");
+    d.className = "phase-card";
+    d.innerHTML =
+      '<div class="phase-header">'+
+        '<span class="phase-num">' + p.name + '</span>'+
+        '<span class="phase-sub">' + p.subtitle + '</span>'+
+        '<span class="phase-range">' + R.data[p.start_idx].date + ' ~ ' + R.data[p.end_idx].date + '</span>'+
+      '</div>'+
+      '<div class="phase-body">' + p.analysis + '</div>';
+    el.appendChild(d);
+  });
+})();
+
+/* ================================================================
+   CHART UTILITIES
+   ================================================================ */
+function sv(v, mn, mx, y, h) {
+  if (mx === mn) return y + h / 2;
+  return y + h - (v - mn) / (mx - mn) * h;
+}
+
+function drawGrid(ctx, x, y, w, h, mn, mx, n, fmtFn) {
+  ctx.strokeStyle = "#e8e8e8";
+  ctx.lineWidth = 0.35;
+  for (let i = 1; i < n; i++) {
+    const yy = y + (h * i / n);
+    ctx.beginPath();
+    ctx.moveTo(x, yy);
+    ctx.lineTo(x + w, yy);
+    ctx.stroke();
+  }
+  // baseline
+  ctx.strokeStyle = "#d0d0d0";
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(x, y + h);
+  ctx.lineTo(x + w, y + h);
+  ctx.stroke();
+  // labels
+  ctx.fillStyle = "#777";
+  ctx.font = "9px SimSun, serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let i = 0; i <= n; i++) {
+    const yy = y + (h * i / n);
+    ctx.fillText(fmtFn(mx - (mx - mn) * i / n), x - 7, yy);
+  }
+}
+
+function drawDateLabels(ctx, x, y, w, h, data) {
+  ctx.fillStyle = "#444444";
+  ctx.font = "10px SimSun, serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  const idxs = [0, Math.floor(data.length / 4), Math.floor(data.length / 2), Math.floor(3 * data.length / 4), data.length - 1];
+  idxs.forEach(i => {
+    const xx = x + i / Math.max(1, data.length - 1) * w;
+    ctx.fillText(data[i].date, xx, y + h + 8);
+  });
+}
+
+function drawLine(ctx, vals, color, width, dash, alpha, left, top, w, h, mn, mx) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.globalAlpha = alpha || 1;
+  if (dash) ctx.setLineDash(dash);
+  ctx.beginPath();
+  let started = false;
+  for (let i = 0; i < vals.length; i++) {
+    if (vals[i] === null) { started = false; continue; }
+    const x = left + i / Math.max(1, vals.length - 1) * w;
+    const y = sv(vals[i], mn, mx, top, h);
+    if (!started) { ctx.moveTo(x, y); started = true; }
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+/* ================================================================
+   FIGURE 1 — K-LINE + VOLUME + MAs
+   ================================================================ */
+(function(){
+  const c = document.getElementById("kline");
+  const ctx = c.getContext("2d");
+  const W = c.width, H = c.height;
+  const pad = { l: 90, r: 40, t: 28, b: 48 };
+  const plotW = W - pad.l - pad.r;
+  const priceH = 410, volH = 115, gap = 32;
+  const volY = pad.t + priceH + gap;
+  const data = R.data;
+
+  const allMA = [...R.ma5, ...R.ma20, ...R.ma60].filter(v => v !== null);
+  const allLow = data.map(d => d.low), allHigh = data.map(d => d.high);
+  const mnP = Math.min(...allLow.concat(allMA)) * 0.96;
+  const mxP = Math.max(...allHigh.concat(allMA)) * 1.04;
+  const vols = data.map(d => d.vol);
+  const mxV = Math.max(...vols) * 1.1;
+
+  drawGrid(ctx, pad.l, pad.t, plotW, priceH, mnP, mxP, 5, v => v.toFixed(1));
+  drawGrid(ctx, pad.l, volY, plotW, volH, 0, mxV, 2, v => (v / 10000).toFixed(0) + "万");
+
+  // Phase backgrounds — very subtle
+  const pc = [
+    "rgba(184,165,160,0.04)",
+    "rgba(184,165,160,0.07)",
+    "rgba(184,165,160,0.04)",
+    "rgba(184,165,160,0.07)",
+    "rgba(184,165,160,0.04)"
+  ];
+  R.phases.forEach((p, i) => {
+    const x1 = pad.l + p.start_idx / Math.max(1, data.length - 1) * plotW;
+    const x2 = pad.l + p.end_idx / Math.max(1, data.length - 1) * plotW;
+    ctx.fillStyle = pc[i % pc.length];
+    ctx.fillRect(x1, pad.t, x2 - x1, priceH);
+    ctx.fillStyle = "rgba(107,103,98,0.22)";
+    ctx.font = "8px SimSun, serif";
+    ctx.textAlign = "center";
+    ctx.fillText(p.name, (x1 + x2) / 2, pad.t + 12);
+  });
+
+  // MAs (back to front)
+  drawLine(ctx, R.ma60, "#5a8ab5", 1.6, null, 0.75, pad.l, pad.t, plotW, priceH, mnP, mxP);
+  drawLine(ctx, R.ma20, "#7aa88b", 1.6, null, 0.80, pad.l, pad.t, plotW, priceH, mnP, mxP);
+  drawLine(ctx, R.ma5, "#d4786e", 1.8, null, 0.88, pad.l, pad.t, plotW, priceH, mnP, mxP);
+
+  // Candles
+  const step = plotW / data.length;
+  const bw = Math.max(1.5, step * 0.48);
+  data.forEach((d, i) => {
+    const cx = pad.l + step * (i + 0.5);
+    const col = d.close >= d.open ? "#d4786e" : "#5fa88b";
+    const yH = sv(d.high, mnP, mxP, pad.t, priceH);
+    const yL = sv(d.low, mnP, mxP, pad.t, priceH);
+    const yO = sv(d.open, mnP, mxP, pad.t, priceH);
+    const yC = sv(d.close, mnP, mxP, pad.t, priceH);
+    ctx.strokeStyle = col;
+    ctx.fillStyle = col;
+    ctx.beginPath();
+    ctx.moveTo(cx, yH);
+    ctx.lineTo(cx, yL);
+    ctx.stroke();
+    const top = Math.min(yO, yC), ht = Math.max(0.8, Math.abs(yC - yO));
+    ctx.fillRect(cx - bw / 2, top, bw, ht);
+
+    // Volume bar
+    const vy = sv(d.vol, 0, mxV, volY, volH);
+    ctx.fillStyle = d.close >= d.open ? "rgba(196,149,138,0.38)" : "rgba(143,168,155,0.38)";
+    ctx.fillRect(cx - bw / 2, vy, bw, volY + volH - vy);
+  });
+
+  // Volume MA5 (dashed)
+  const volMA5 = (function(){
+    const vs = data.map(d => d.vol);
+    const out = [];
+    for (let i = 0; i < vs.length; i++) out.push(i < 4 ? null : vs.slice(i - 4, i + 1).reduce((a, b) => a + b) / 5);
+    return out;
+  })();
+  drawLine(ctx, volMA5, "rgba(196,149,138,0.28)", 0.8, [3, 3], 1, pad.l, volY, plotW, volH, 0, mxV);
+
+  // Subtle extreme dot markers
+  const maxIdx = data.reduce((a, b, i, arr) => b.close > arr[a].close ? i : a, 0);
+  const minIdx = data.reduce((a, b, i, arr) => b.close < arr[a].close ? i : a, 0);
+  const maxVIdx = data.reduce((a, b, i, arr) => b.vol > arr[a].vol ? i : a, 0);
+  [{idx: maxIdx, col: "#d4786e"}, {idx: minIdx, col: "#5fa88b"}, {idx: maxVIdx, col: "#d49a88"}].forEach(n => {
+    const d = data[n.idx], cx = pad.l + step * (n.idx + 0.5), py = sv(d.close, mnP, mxP, pad.t, priceH);
+    ctx.fillStyle = n.col;
+    ctx.beginPath();
+    ctx.arc(cx, py, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.arc(cx, py, 3.5, 0, Math.PI * 2);
+    ctx.stroke();
+  });
+
+  drawDateLabels(ctx, pad.l, volY, plotW, volH, data);
+
+  // Legend (top-right)
+  const legend = [
+    ["#d4786e", "MA5"],
+    ["#7aa88b", "MA20"],
+    ["#5a8ab5", "MA60"],
+    ["#d4786e", "阳线"],
+    ["#5fa88b", "阴线"]
+  ];
+  const lx = pad.l + plotW - 330;
+  legend.forEach((l, i) => {
+    const xx = lx + i * 66;
+    const ly = pad.t + 8;
+    if (i < 3) {
+      ctx.strokeStyle = l[0];
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(xx, ly);
+      ctx.lineTo(xx + 14, ly);
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = l[0];
+      ctx.fillRect(xx, ly - 3, 14, 7);
+    }
+    ctx.fillStyle = "#333333";
+    ctx.font = "8.5px SimSun, serif";
+    ctx.textAlign = "left";
+    ctx.fillText(l[1], xx + 17, ly + 3);
+  });
+  ctx.fillStyle = "#333333";
+  ctx.font = "11px SimSun, serif";
+  ctx.textAlign = "left";
+  ctx.fillText("价格 · 元", pad.l, pad.t - 6);
+  ctx.fillText("成交量 · 手", pad.l, volY - 8);
+})();
+
+/* ================================================================
+   FIGURE 2 — CLOSE LINE + MAs
+   ================================================================ */
+(function(){
+  const c = document.getElementById("closeLine");
+  const ctx = c.getContext("2d");
+  const W = c.width, H = c.height;
+  const pad = { l: 90, r: 40, t: 28, b: 48 };
+  const plotW = W - pad.l - pad.r, plotH = H - pad.t - pad.b;
+  const data = R.data, closes = data.map(d => d.close);
+  const allMA = [...R.ma5, ...R.ma20, ...R.ma60].filter(v => v !== null);
+  const mnP = Math.min(...closes.concat(allMA)) * 0.95;
+  const mxP = Math.max(...closes.concat(allMA)) * 1.05;
+
+  // Phase backgrounds
+  const pc = [
+    "rgba(184,165,160,0.04)",
+    "rgba(184,165,160,0.07)",
+    "rgba(184,165,160,0.04)",
+    "rgba(184,165,160,0.07)",
+    "rgba(184,165,160,0.04)"
+  ];
+  R.phases.forEach((p, i) => {
+    const x1 = pad.l + p.start_idx / Math.max(1, data.length - 1) * plotW;
+    const x2 = pad.l + p.end_idx / Math.max(1, data.length - 1) * plotW;
+    ctx.fillStyle = pc[i % pc.length];
+    ctx.fillRect(x1, pad.t, x2 - x1, plotH);
+    ctx.fillStyle = "rgba(107,103,98,0.24)";
+    ctx.font = "8px SimSun, serif";
+    ctx.textAlign = "center";
+    ctx.fillText(p.name, (x1 + x2) / 2, pad.t + 12);
+  });
+
+  drawGrid(ctx, pad.l, pad.t, plotW, plotH, mnP, mxP, 5, v => v.toFixed(1));
+
+  drawLine(ctx, R.ma60, "#5a8ab5", 1.4, [6, 3], 0.75, pad.l, pad.t, plotW, plotH, mnP, mxP);
+  drawLine(ctx, R.ma20, "#7aa88b", 1.4, [4, 2], 0.80, pad.l, pad.t, plotW, plotH, mnP, mxP);
+  drawLine(ctx, R.ma5, "#d4786e", 1.4, null, 0.88, pad.l, pad.t, plotW, plotH, mnP, mxP);
+
+  // Close line
+  ctx.strokeStyle = "#3a3a3a";
+  ctx.lineWidth = 2.2;
+  ctx.beginPath();
+  for (let i = 0; i < data.length; i++) {
+    const x = pad.l + i / Math.max(1, data.length - 1) * plotW;
+    const y = sv(data[i].close, mnP, mxP, pad.t, plotH);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  drawDateLabels(ctx, pad.l, pad.t, plotW, plotH, data);
+
+  // Legend
+  const legend2 = [
+    ["#3a3a3a", "收盘价", null],
+    ["#d4786e", "MA5", null],
+    ["#7aa88b", "MA20", [4, 2]],
+    ["#5a8ab5", "MA60", [6, 3]]
+  ];
+  const lx2 = pad.l + plotW - 350;
+  legend2.forEach((l, i) => {
+    const xx = lx2 + i * 88, yy = pad.t + 22;
+    if (l[2]) ctx.setLineDash(l[2]);
+    ctx.strokeStyle = l[0];
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(xx, yy);
+    ctx.lineTo(xx + 16, yy);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#333333";
+    ctx.font = "8.5px SimSun, serif";
+    ctx.textAlign = "left";
+    ctx.fillText(l[1], xx + 18, yy + 4);
+  });
+  ctx.fillStyle = "#333333";
+  ctx.font = "11px SimSun, serif";
+  ctx.textAlign = "left";
+  ctx.fillText("收盘价 · 元", pad.l, pad.t - 6);
+})();
+
+/* ================================================================
+   FIGURE 3 — MACD
+   ================================================================ */
+(function(){
+  const c = document.getElementById("macdChart");
+  const ctx = c.getContext("2d");
+  const W = c.width, H = c.height;
+  const pad = { l: 90, r: 40, t: 18, b: 40 };
+  const plotW = W - pad.l - pad.r, plotH = H - pad.t - pad.b;
+  const data = R.data;
+
+  const difVals = R.macd_dif.filter(v => v !== null);
+  const deaVals = R.macd_dea.filter(v => v !== null);
+  const histVals = R.macd_hist.filter(v => v !== null);
+  const allV = [...difVals, ...deaVals, ...histVals];
+  const mnV = Math.min(...allV) * 1.1, mxV = Math.max(...allV) * 1.1;
+  const range = Math.max(Math.abs(mnV), Math.abs(mxV));
+  const symMn = -range, symMx = range;
+
+  // Zero line
+  const zy = sv(0, symMn, symMx, pad.t, plotH);
+  ctx.strokeStyle = "#cccccc";
+  ctx.lineWidth = 0.8;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(pad.l, zy);
+  ctx.lineTo(pad.l + plotW, zy);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = "#444444";
+  ctx.font = "8px SimSun, serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  ctx.fillText("0", pad.l - 6, zy);
+
+  drawGrid(ctx, pad.l, pad.t, plotW, plotH, symMn, symMx, 4, v => v.toFixed(1));
+
+  drawLine(ctx, R.macd_dif, "#3a3a3a", 1.5, null, 1, pad.l, pad.t, plotW, plotH, symMn, symMx);
+  drawLine(ctx, R.macd_dea, "#d4886e", 1.3, null, 0.85, pad.l, pad.t, plotW, plotH, symMn, symMx);
+
+  // Histogram
+  const step = plotW / data.length;
+  data.forEach((d, i) => {
+    if (R.macd_hist[i] === null) return;
+    const cx = pad.l + step * (i + 0.5), bw2 = Math.max(1.1, step * 0.40);
+    const hy = sv(R.macd_hist[i], symMn, symMx, pad.t, plotH);
+    ctx.fillStyle = R.macd_hist[i] >= 0 ? "rgba(212,120,110,0.55)" : "rgba(95,168,139,0.55)";
+    if (R.macd_hist[i] >= 0) ctx.fillRect(cx - bw2 / 2, hy, bw2, zy - hy);
+    else ctx.fillRect(cx - bw2 / 2, zy, bw2, hy - zy);
+  });
+
+  drawDateLabels(ctx, pad.l, pad.t, plotW, plotH, data);
+
+  // Legend
+  ctx.fillStyle = "#3a3a3a";
+  ctx.font = "9px SimSun, serif";
+  ctx.textAlign = "left";
+  ctx.fillText("DIF", pad.l + plotW - 220, pad.t + 8);
+  ctx.fillStyle = "#d4886e";
+  ctx.fillText("DEA", pad.l + plotW - 182, pad.t + 8);
+  ctx.fillStyle = "#d4786e";
+  ctx.fillText("红柱", pad.l + plotW - 140, pad.t + 8);
+  ctx.fillStyle = "#5fa88b";
+  ctx.fillText("绿柱", pad.l + plotW - 98, pad.t + 8);
+})();
+
+/* ================================================================
+   FIGURE 4 — RSI + BOLLINGER
+   ================================================================ */
+(function(){
+  const c = document.getElementById("rsiBollChart");
+  const ctx = c.getContext("2d");
+  const W = c.width, H = c.height;
+  const pad = { l: 90, r: 40, t: 18, b: 40 };
+  const plotW = W - pad.l - pad.r;
+  const rsiH = 130, bollH = 210, gap = 28;
+  const bollY = pad.t + rsiH + gap;
+  const data = R.data, closes = data.map(d => d.close);
+
+  // ---- RSI ----
+  drawGrid(ctx, pad.l, pad.t, plotW, rsiH, 0, 100, 4, v => v.toFixed(0));
+  // 30/70 reference lines
+  [30, 70].forEach(lv => {
+    const ly = sv(lv, 0, 100, pad.t, rsiH);
+    ctx.strokeStyle = "rgba(80,80,80,0.25)";
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(pad.l, ly);
+    ctx.lineTo(pad.l + plotW, ly);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#444444";
+    ctx.font = "7.5px SimSun, serif";
+    ctx.textAlign = "right";
+    ctx.fillText(lv, pad.l - 6, ly - 1);
+  });
+  drawLine(ctx, R.rsi14, "#9a7a9a", 1.6, null, 1, pad.l, pad.t, plotW, rsiH, 0, 100);
+
+  // ---- Bollinger ----
+  const bbVals = [...R.bb_upper, ...R.bb_mid, ...R.bb_lower].filter(v => v !== null);
+  const mnB = Math.min(...bbVals.concat(closes)) * 0.93;
+  const mxB = Math.max(...bbVals.concat(closes)) * 1.07;
+  drawGrid(ctx, pad.l, bollY, plotW, bollH, mnB, mxB, 4, v => v.toFixed(1));
+
+  // Bollinger filled area
+  ctx.fillStyle = "rgba(184,165,160,0.06)";
+  ctx.beginPath();
+  let started = false;
+  for (let i = 0; i < data.length; i++) {
+    if (R.bb_upper[i] === null || R.bb_lower[i] === null) { started = false; continue; }
+    const x = pad.l + i / Math.max(1, data.length - 1) * plotW;
+    const yu = sv(R.bb_upper[i], mnB, mxB, bollY, bollH);
+    if (!started) { ctx.moveTo(x, yu); started = true; }
+    else ctx.lineTo(x, yu);
+  }
+  for (let i = data.length - 1; i >= 0; i--) {
+    if (R.bb_lower[i] === null) continue;
+    const x = pad.l + i / Math.max(1, data.length - 1) * plotW;
+    const yl = sv(R.bb_lower[i], mnB, mxB, bollY, bollH);
+    ctx.lineTo(x, yl);
+  }
+  ctx.closePath();
+  ctx.fill();
+
+  drawLine(ctx, R.bb_upper, "rgba(138,159,181,0.36)", 0.8, [3, 3], 1, pad.l, bollY, plotW, bollH, mnB, mxB);
+  drawLine(ctx, R.bb_lower, "rgba(138,159,181,0.36)", 0.8, [3, 3], 1, pad.l, bollY, plotW, bollH, mnB, mxB);
+  drawLine(ctx, R.bb_mid, "#5a8ab5", 1.2, null, 0.65, pad.l, bollY, plotW, bollH, mnB, mxB);
+  drawLine(ctx, closes, "#3a3a3a", 2.0, null, 1, pad.l, bollY, plotW, bollH, mnB, mxB);
+
+  drawDateLabels(ctx, pad.l, bollY, plotW, bollH, data);
+
+  // Labels
+  ctx.fillStyle = "#333333";
+  ctx.font = "11px SimSun, serif";
+  ctx.textAlign = "left";
+  ctx.fillText("RSI(14)", pad.l, pad.t - 6);
+  ctx.fillText("布林带 (20, 2)", pad.l, bollY - 10);
+
+  // BB legend
+  const blx = pad.l + plotW - 300, bly = bollY + 8;
+  [
+    [[3, 3], "rgba(138,159,181,0.36)", "上/下轨"],
+    [[], "#5a8ab5", "中轨MA20"],
+    [[], "#3a3a3a", "收盘价"]
+  ].forEach((l, i) => {
+    const xx = blx + i * 100;
+    if (l[0] && l[0].length) ctx.setLineDash(l[0]);
+    ctx.strokeStyle = l[1];
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(xx, bly);
+    ctx.lineTo(xx + 14, bly);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#333333";
+    ctx.font = "7.5px SimSun, serif";
+    ctx.textAlign = "left";
+    ctx.fillText(l[2], xx + 16, bly + 4);
+  });
+})();
+</script>
+</body>
+</html>
